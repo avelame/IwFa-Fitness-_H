@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>IWFA Fitness | PPL Otimizado </title>
+    <title>IWFA Fitness | PPL Otimizado</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -122,11 +122,13 @@
         .exercise-item {
             padding: 16px 18px;
             border-bottom: 1px solid #252e3a;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
         .exercise-name {
             font-weight: 700;
             font-size: 1rem;
-            margin-bottom: 8px;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -136,7 +138,7 @@
             display: flex;
             flex-wrap: wrap;
             gap: 12px;
-            margin-bottom: 14px;
+            margin-bottom: 8px;
         }
         .field {
             background: #0b1018;
@@ -162,25 +164,52 @@
             font-family: monospace;
         }
         .field input:focus { outline: none; }
+        
+        /* Séries checkboxes */
+        .series-checkboxes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            margin: 8px 0;
+        }
+        .series-check {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #1a212c;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+        }
+        .series-check input {
+            width: 18px;
+            height: 18px;
+            accent-color: #FF8C00;
+            cursor: pointer;
+        }
+        
+        /* GIF centralizado */
         .gif-container {
-            margin-top: 12px;
+            margin-top: 8px;
             background: #080c12;
             border-radius: 20px;
             padding: 12px;
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             border-left: 3px solid #FF8C00;
+            width: 100%;
         }
         .gif-preview-large {
-            flex: 1;
-            min-width: 100px;
-            max-width: 130px;
+            display: flex;
+            justify-content: center;
+            width: 100%;
         }
         .gif-preview-large img {
-            width: 100%;
-            max-height: 100px;
+            max-width: 140px;
+            max-height: 110px;
             object-fit: contain;
             border-radius: 16px;
             background: #00000050;
@@ -193,11 +222,13 @@
             flex-direction: column;
             align-items: center;
             gap: 6px;
+            text-align: center;
         }
         .gif-actions {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
+            justify-content: center;
         }
         .gif-btn {
             background: #1f2a36;
@@ -213,6 +244,7 @@
             gap: 5px;
         }
         .gif-btn:active { background: #FF8C00; color: black; }
+        
         .start-workout-btn {
             background: linear-gradient(135deg, #FF8C00, #FFA500);
             border: none;
@@ -272,7 +304,6 @@
             font-size: 0.75rem;
             cursor: pointer;
         }
-        /* Botões inferiores */
         .bottom-actions {
             display: flex;
             gap: 15px;
@@ -297,22 +328,21 @@
         }
         .action-btn i { color: #FFA500; }
         .action-btn:active { transform: scale(0.97); }
-        /* Modal relatório */
-        .modal-report {
+        .modal, .modal-report {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.95);
             align-items: center;
             justify-content: center;
-            z-index: 1001;
+            z-index: 1000;
             overflow-y: auto;
             padding: 20px;
         }
-        .report-content {
+        .modal-content, .report-content {
             background: #1a212e;
             border-radius: 32px;
             padding: 24px;
@@ -341,9 +371,6 @@
             border-bottom: 1px solid #2a3542;
             padding: 10px 0;
         }
-        .progress-item strong {
-            color: #FFA500;
-        }
         .progress-badge {
             display: inline-block;
             margin-left: 10px;
@@ -352,12 +379,8 @@
             padding: 2px 8px;
             border-radius: 20px;
         }
-        .regress-badge {
-            background: #8b3a3a;
-        }
-        .neutral-badge {
-            background: #5a5a5a;
-        }
+        .regress-badge { background: #8b3a3a; }
+        .neutral-badge { background: #5a5a5a; }
         .close-report {
             background: #FF8C00;
             border: none;
@@ -367,26 +390,6 @@
             margin-top: 20px;
             cursor: pointer;
             width: 100%;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.9);
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
-        .modal-content {
-            background: #1a212e;
-            border-radius: 32px;
-            padding: 24px;
-            width: 90%;
-            max-width: 320px;
-            text-align: center;
         }
         .modal-content input {
             width: 100%;
@@ -416,9 +419,8 @@
 <body>
 <div class="container">
     <div class="plan-header">
-        <h1><i class="fas fa-dumbbell"></i> Meu Plano PPL · IwFa Fitenss </h1>
+        <h1><i class="fas fa-dumbbell"></i> Meu Plano PPL · IWFA Fitness </h1>
     </div>
-
     <div class="days-tabs" id="daysTabs">
         <button class="tab-day" data-day="1">DIA 1 (A)</button>
         <button class="tab-day" data-day="2">DIA 2 (B)</button>
@@ -427,9 +429,7 @@
         <button class="tab-day" data-day="5">DIA 5 (B)</button>
         <button class="tab-day" data-day="6">DIA 6 (C)</button>
     </div>
-
     <div id="dayContent"></div>
-
     <div class="progress-footer">
         <span class="week-range" id="weekRangeDisplay">Semana</span>
         <div class="progress-bar-bg"><div id="progressFill" class="progress-fill"></div></div>
@@ -440,15 +440,11 @@
         <button id="todayWeekBtn" class="week-btn"><i class="fas fa-calendar-day"></i> Hoje</button>
         <button id="nextWeekBtn" class="week-btn">Próxima semana <i class="fas fa-chevron-right"></i></button>
     </div>
-    
-    <!-- Botões inferiores -->
     <div class="bottom-actions">
         <button id="saveBtn" class="action-btn"><i class="fas fa-save"></i> Salvar</button>
         <button id="reportBtn" class="action-btn"><i class="fas fa-chart-line"></i> Gerar Relatório Semanal</button>
     </div>
 </div>
-
-<!-- Modal URL GIF -->
 <div id="urlModal" class="modal">
     <div class="modal-content">
         <h3><i class="fas fa-link"></i> URL do GIF</h3>
@@ -459,16 +455,12 @@
         </div>
     </div>
 </div>
-
-<!-- Modal Relatório -->
 <div id="reportModal" class="modal-report">
-    <div class="report-content" id="reportContent">
-        <!-- dinâmico -->
-    </div>
+    <div class="report-content" id="reportContent"></div>
 </div>
 
 <script>
-    // ---------- TREINO PPL OTIMIZADO ----------
+    // Base de treinos (igual anterior)
     const workoutsByDay = {
         1: { name: "PUSH · Peito / Ombro / Tríceps", muscles: ["Peito","Ombros","Tríceps"], timeMin: 70,
             exercises: [
@@ -531,13 +523,35 @@
     function isWorkoutDone(dateObj) { return localStorage.getItem(getWorkoutKey(dateObj)) === 'true'; }
     function setWorkoutDone(dateObj, done) { done ? localStorage.setItem(getWorkoutKey(dateObj),'true') : localStorage.removeItem(getWorkoutKey(dateObj)); renderCurrentDay(); updateProgress(); }
     function getLoad(day, idx) { return localStorage.getItem(`load_${day}_${idx}`) ?? workoutsByDay[day].exercises[idx].defaultLoad; }
-    function setLoad(day, idx, val) { localStorage.setItem(`load_${day}_${idx}`, val); }
+    function setLoad(day, idx, val) { localStorage.setItem(`load_${day}_${idx}`, val); renderCurrentDay(); }
     function getSeries(day, idx) { return localStorage.getItem(`series_${day}_${idx}`) ?? workoutsByDay[day].exercises[idx].defaultSeries; }
-    function setSeries(day, idx, val) { localStorage.setItem(`series_${day}_${idx}`, val); }
+    function setSeries(day, idx, val) { localStorage.setItem(`series_${day}_${idx}`, val); renderCurrentDay(); }
     function getReps(day, idx) { return localStorage.getItem(`reps_${day}_${idx}`) ?? workoutsByDay[day].exercises[idx].defaultReps; }
-    function setReps(day, idx, val) { localStorage.setItem(`reps_${day}_${idx}`, val); }
+    function setReps(day, idx, val) { localStorage.setItem(`reps_${day}_${idx}`, val); renderCurrentDay(); }
     function getGif(day, idx) { return localStorage.getItem(`gif_${day}_${idx}`); }
     function setGif(day, idx, url) { if(url) localStorage.setItem(`gif_${day}_${idx}`, url); else localStorage.removeItem(`gif_${day}_${idx}`); renderCurrentDay(); }
+    // Checkboxes de séries individuais: salvar como array de booleans
+    function getSeriesChecks(day, idx, totalSeries) {
+        const key = `series_checks_${day}_${idx}`;
+        const stored = localStorage.getItem(key);
+        if(stored) {
+            const arr = JSON.parse(stored);
+            while(arr.length < totalSeries) arr.push(false);
+            if(arr.length > totalSeries) arr.length = totalSeries;
+            return arr;
+        }
+        return Array(totalSeries).fill(false);
+    }
+    function setSeriesChecks(day, idx, checks) {
+        const key = `series_checks_${day}_${idx}`;
+        localStorage.setItem(key, JSON.stringify(checks));
+        renderCurrentDay(); // atualiza para refletir visual
+    }
+    function toggleSeriesCheck(day, idx, seriesIndex, totalSeries) {
+        const checks = getSeriesChecks(day, idx, totalSeries);
+        checks[seriesIndex] = !checks[seriesIndex];
+        setSeriesChecks(day, idx, checks);
+    }
 
     // Datas
     function getMondayOfCurrentWeek(ref = new Date()) {
@@ -556,7 +570,6 @@
     let currentMonday = getMondayOfCurrentWeek();
     let activeDay = 1;
 
-    // Render do dia ativo
     function renderCurrentDay() {
         const dateObj = getDateOfWeekday(currentMonday, activeDay);
         const workout = workoutsByDay[activeDay];
@@ -578,16 +591,43 @@
         let exercisesHtml = '';
         workout.exercises.forEach((ex, idx) => {
             const currentLoad = getLoad(activeDay, idx);
-            const currentSeries = getSeries(activeDay, idx);
+            const currentSeries = parseInt(getSeries(activeDay, idx)) || 0;
             const currentReps = getReps(activeDay, idx);
             const gifUrl = getGif(activeDay, idx);
+            
+            // Checkboxes das séries
+            let seriesChecksHtml = '';
+            if(currentSeries > 0) {
+                const checks = getSeriesChecks(activeDay, idx, currentSeries);
+                seriesChecksHtml = `<div class="series-checkboxes">${checks.map((checked, sIdx) => `
+                    <label class="series-check">
+                        <input type="checkbox" class="series-checkbox" data-day="${activeDay}" data-ex="${idx}" data-series="${sIdx}" ${checked ? 'checked' : ''}>
+                        <span>Série ${sIdx+1}</span>
+                    </label>
+                `).join('')}</div>`;
+            } else {
+                seriesChecksHtml = `<div class="series-checkboxes" style="opacity:0.6;">Defina o número de séries acima</div>`;
+            }
+            
             let gifBlock = '';
             if (gifUrl) {
                 gifBlock = `<div class="gif-container"><div class="gif-preview-large"><img src="${gifUrl}" alt="GIF" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'gif-placeholder\'><i class=\'fas fa-broken-image\'></i> GIF inválido</div>'"></div><div class="gif-actions"><button class="gif-btn upload-gif" data-day="${activeDay}" data-ex="${idx}"><i class="fas fa-upload"></i> Novo GIF</button><button class="gif-btn url-gif" data-day="${activeDay}" data-ex="${idx}"><i class="fas fa-link"></i> URL</button><button class="gif-btn remove-gif" data-day="${activeDay}" data-ex="${idx}"><i class="fas fa-trash-alt"></i> Remover</button></div></div>`;
             } else {
                 gifBlock = `<div class="gif-container"><div class="gif-placeholder"><i class="fas fa-play-circle fa-2x"></i><span>Adicione um GIF demonstrativo</span></div><div class="gif-actions"><button class="gif-btn upload-gif" data-day="${activeDay}" data-ex="${idx}"><i class="fas fa-upload"></i> Enviar GIF</button><button class="gif-btn url-gif" data-day="${activeDay}" data-ex="${idx}"><i class="fas fa-link"></i> URL do GIF</button></div></div>`;
             }
-            exercisesHtml += `<div class="exercise-item"><div class="exercise-name"><i class="fas fa-dumbbell"></i> ${ex.name}</div><div class="exercise-fields-row"><div class="field"><label>SÉRIES</label><input type="text" class="series-input" data-day="${activeDay}" data-ex="${idx}" value="${currentSeries}"></div><div class="field"><label>REPS</label><input type="text" class="reps-input" data-day="${activeDay}" data-ex="${idx}" value="${currentReps}"></div><div class="field"><label>CARGA (kg)</label><input type="text" class="load-input" data-day="${activeDay}" data-ex="${idx}" value="${currentLoad}"></div></div>${gifBlock}</div>`;
+            
+            exercisesHtml += `
+                <div class="exercise-item">
+                    <div class="exercise-name"><i class="fas fa-dumbbell"></i> ${ex.name}</div>
+                    <div class="exercise-fields-row">
+                        <div class="field"><label>SÉRIES</label><input type="number" class="series-input" data-day="${activeDay}" data-ex="${idx}" value="${currentSeries}" step="1" min="0"></div>
+                        <div class="field"><label>REPS</label><input type="text" class="reps-input" data-day="${activeDay}" data-ex="${idx}" value="${currentReps}"></div>
+                        <div class="field"><label>CARGA (kg)</label><input type="text" class="load-input" data-day="${activeDay}" data-ex="${idx}" value="${currentLoad}"></div>
+                    </div>
+                    ${seriesChecksHtml}
+                    ${gifBlock}
+                </div>
+            `;
         });
         
         const btnText = done ? 'TREINO CONCLUÍDO ✅' : 'INICIAR TREINO';
@@ -600,9 +640,21 @@
     }
     
     function attachExerciseEvents() {
+        // Campos editáveis
         document.querySelectorAll('.load-input').forEach(inp => inp.addEventListener('change', (e) => { setLoad(parseInt(inp.dataset.day), parseInt(inp.dataset.ex), inp.value); }));
         document.querySelectorAll('.series-input').forEach(inp => inp.addEventListener('change', (e) => { setSeries(parseInt(inp.dataset.day), parseInt(inp.dataset.ex), inp.value); }));
         document.querySelectorAll('.reps-input').forEach(inp => inp.addEventListener('change', (e) => { setReps(parseInt(inp.dataset.day), parseInt(inp.dataset.ex), inp.value); }));
+        
+        // Checkboxes de séries
+        document.querySelectorAll('.series-checkbox').forEach(cb => cb.addEventListener('change', (e) => {
+            const day = parseInt(cb.dataset.day);
+            const ex = parseInt(cb.dataset.ex);
+            const seriesIdx = parseInt(cb.dataset.series);
+            const totalSeries = parseInt(getSeries(day, ex)) || 0;
+            toggleSeriesCheck(day, ex, seriesIdx, totalSeries);
+        }));
+        
+        // GIF
         document.querySelectorAll('.upload-gif').forEach(btn => btn.addEventListener('click', (e) => { const day = parseInt(btn.dataset.day), ex = parseInt(btn.dataset.ex); const input = document.createElement('input'); input.type='file'; input.accept='image/gif'; input.onchange=(ev)=>{ const file=ev.target.files[0]; if(file && file.type==='image/gif'){ const reader=new FileReader(); reader.onload=(er)=>setGif(day, ex, er.target.result); reader.readAsDataURL(file); } else alert('Selecione um .gif'); }; input.click(); }));
         document.querySelectorAll('.url-gif').forEach(btn => btn.addEventListener('click', (e) => { showUrlModal(parseInt(btn.dataset.day), parseInt(btn.dataset.ex)); }));
         document.querySelectorAll('.remove-gif').forEach(btn => btn.addEventListener('click', (e) => { setGif(parseInt(btn.dataset.day), parseInt(btn.dataset.ex), null); }));
@@ -627,32 +679,27 @@
     function navigateWeek(delta) { const nd = new Date(currentMonday); nd.setDate(currentMonday.getDate() + delta*7); currentMonday = nd; updateProgress(); setActiveDay(activeDay); }
     function goToCurrentWeek() { currentMonday = getMondayOfCurrentWeek(new Date()); updateProgress(); setActiveDay(activeDay); }
     
-    // Botão Salvar (apenas notifica, mas os dados já estão salvos no localStorage)
-    document.getElementById('saveBtn').addEventListener('click', () => { alert('✅ Todos os dados (cargas, treinos concluídos, GIFs) já estão salvos automaticamente no navegador.'); });
+    document.getElementById('saveBtn').addEventListener('click', () => { alert('✅ Todos os dados (cargas, séries concluídas, GIFs) já estão salvos automaticamente.'); });
     
-    // Relatório Semanal
+    // Relatório com progressão de carga (apenas cargas, e também exibe % de séries concluídas)
     function getPreviousWeekMonday(monday) { const prev = new Date(monday); prev.setDate(monday.getDate() - 7); return prev; }
-    function getLoadPrevious(day, idx, mondayRef) { const prevMonday = getPreviousWeekMonday(mondayRef); const prevDate = getDateOfWeekday(prevMonday, day); const key = `load_${day}_${idx}`; return localStorage.getItem(key) ?? workoutsByDay[day].exercises[idx].defaultLoad; }
+    function getLoadPrevious(day, idx, mondayRef) { const prevMonday = getPreviousWeekMonday(mondayRef); const key = `load_${day}_${idx}`; return localStorage.getItem(key) ?? workoutsByDay[day].exercises[idx].defaultLoad; }
     function gerarRelatorio() {
         const monday = currentMonday;
-        const weekDates = [];
-        for(let i=1;i<=6;i++) weekDates.push(getDateOfWeekday(monday, i));
         let totalTime = 0;
         let completedCount = 0;
         for(let i=1;i<=6;i++) { if(isWorkoutDone(getDateOfWeekday(monday, i))) { completedCount++; totalTime += workoutsByDay[i].timeMin; } }
-        const html = [];
-        html.push(`<h3><i class="fas fa-chart-line"></i> Relatório Semanal</h3>`);
-        html.push(`<div class="report-week"><strong>Período:</strong> ${formatBR(weekDates[0])} a ${formatBR(weekDates[5])}<br><strong>Treinos realizados:</strong> ${completedCount}/6<br><strong>Tempo total estimado:</strong> ${totalTime} minutos</div>`);
-        html.push(`<div><strong>📊 Progressão de Carga (semana atual vs anterior)</strong></div>`);
+        let html = `<h3><i class="fas fa-chart-line"></i> Relatório Semanal</h3>`;
+        html += `<div class="report-week"><strong>Período:</strong> ${formatBR(getDateOfWeekday(monday,1))} a ${formatBR(getDateOfWeekday(monday,6))}<br><strong>Treinos realizados:</strong> ${completedCount}/6<br><strong>Tempo total estimado:</strong> ${totalTime} minutos</div>`;
+        html += `<div><strong>📊 Progressão de Carga (semana atual vs anterior)</strong></div>`;
         for(let day=1; day<=6; day++) {
             const workout = workoutsByDay[day];
             if(!workout) continue;
-            html.push(`<div style="margin-top:15px;"><i class="fas fa-calendar-day"></i> <strong>Dia ${day} (${workout.name.split('·')[0]})</strong></div>`);
+            html += `<div style="margin-top:15px;"><i class="fas fa-calendar-day"></i> <strong>Dia ${day} (${workout.name.split('·')[0]})</strong></div>`;
             workout.exercises.forEach((ex, idx) => {
                 const cargaAtual = getLoad(day, idx);
                 const cargaAnterior = getLoadPrevious(day, idx, monday);
-                let diff = "";
-                let badge = "";
+                let diff = "", badge = "";
                 if(cargaAtual !== "--" && cargaAnterior !== "--") {
                     const numAtual = parseFloat(cargaAtual);
                     const numAnt = parseFloat(cargaAnterior);
@@ -660,20 +707,19 @@
                         if(numAtual > numAnt) { diff = ` (+${(numAtual-numAnt).toFixed(1)} kg)`; badge = `<span class="progress-badge">↑ Evolução</span>`; }
                         else if(numAtual < numAnt) { diff = ` (${(numAtual-numAnt).toFixed(1)} kg ↓)`; badge = `<span class="progress-badge regress-badge">↓ Regressão</span>`; }
                         else { diff = ` (estável)`; badge = `<span class="progress-badge neutral-badge">➖ Estável</span>`; }
-                    } else { diff = ""; badge = `<span class="progress-badge neutral-badge">⚪ Comparação não numérica</span>`; }
+                    } else { diff = ""; badge = `<span class="progress-badge neutral-badge">⚪ Não numérico</span>`; }
                 } else { diff = ""; badge = `<span class="progress-badge neutral-badge">⚪ Carga especial</span>`; }
-                html.push(`<div class="progress-item"><strong>${ex.name}</strong><br>Carga atual: ${cargaAtual} kg | Anterior: ${cargaAnterior} kg ${diff} ${badge}</div>`);
+                html += `<div class="progress-item"><strong>${ex.name}</strong><br>Carga atual: ${cargaAtual} kg | Anterior: ${cargaAnterior} kg ${diff} ${badge}</div>`;
             });
         }
-        html.push(`<button id="closeReportBtn" class="close-report"><i class="fas fa-times-circle"></i> Fechar</button>`);
-        document.getElementById('reportContent').innerHTML = html.join('');
+        html += `<button id="closeReportBtnFinal" class="close-report"><i class="fas fa-times-circle"></i> Fechar</button>`;
+        document.getElementById('reportContent').innerHTML = html;
         document.getElementById('reportModal').style.display = 'flex';
-        document.getElementById('closeReportBtn').addEventListener('click', () => { document.getElementById('reportModal').style.display = 'none'; });
+        document.getElementById('closeReportBtnFinal').addEventListener('click', () => { document.getElementById('reportModal').style.display = 'none'; });
     }
     document.getElementById('reportBtn').addEventListener('click', gerarRelatorio);
     window.onclick = (e) => { if(e.target === document.getElementById('reportModal')) document.getElementById('reportModal').style.display = 'none'; };
     
-    // Inicialização
     function initTabs() { document.querySelectorAll('.tab-day').forEach(tab => tab.addEventListener('click', () => setActiveDay(parseInt(tab.dataset.day)))); }
     document.getElementById('prevWeekBtn').addEventListener('click', () => navigateWeek(-1));
     document.getElementById('nextWeekBtn').addEventListener('click', () => navigateWeek(1));

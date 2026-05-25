@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>IWFA Fitness | PPL Otimizado </title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        body {
+            background: #0a0c10;
+            font-family: 'Inter', sans-serif;
+            color: #eef2ff;
+            padding: 20px 16px 40px;
+        }
+        .container {
+            max-width: 650px;
+            margin: 0 auto;
+        }
+        .plan-header {
+            margin-bottom: 20px;
+        }
+        .plan-header h1 {
+            font-size: 1.9rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFA000, #FFD966);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .days-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 16px 0 20px;
+            background: #11161f;
+            padding: 6px;
+            border-radius: 50px;
+            justify-content: space-between;
+        }
+        .tab-day {
+            flex: 1;
+            text-align: center;
+            background: transparent;
+            border: none;
+            padding: 10px 0;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: #9aaec0;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .tab-day.active {
+            background: #FF8C00;
+            color: #0a0c10;
+            box-shadow: 0 4px 10px rgba(255,140,0,0.3);
+        }
+        .workout-card {
+            background: #121722;
+            border-radius: 32px;
+            border: 1px solid #29313e;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .workout-settings {
+            background: #1a212e;
+            padding: 14px 18px;
+            border-bottom: 1px solid #29313e;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .setting-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #0f141c;
+            padding: 5px 14px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        .setting-item i { color: #FFA500; }
+        .muscles-area {
+            background: #0f141c;
+            padding: 12px 18px;
+            border-bottom: 1px solid #29313e;
+        }
+        .muscles-title {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: #aaa;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+        .muscle-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .muscle-tag {
+            background: #1f2a36;
+            padding: 5px 14px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        .exercises-list {
+            padding: 8px 0;
+        }
+        .exercise-item {
+            padding: 16px 18px;
+            border-bottom: 1px solid #252e3a;
+        }
+        .exercise-name {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .exercise-name i { color: #FF8C00; }
+        .exercise-fields-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+        .field {
+            background: #0b1018;
+            border-radius: 28px;
+            padding: 4px 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid #2a3542;
+        }
+        .field label {
+            font-size: 0.65rem;
+            color: #aaa;
+        }
+        .field input {
+            background: transparent;
+            border: none;
+            color: #FFD966;
+            font-weight: 600;
+            width: 55px;
+            font-size: 0.9rem;
+            text-align: center;
+            font-family: monospace;
+        }
+        .field input:focus { outline: none; }
+        .gif-container {
+            margin-top: 12px;
+            background: #080c12;
+            border-radius: 20px;
+            padding: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 15px;
+            border-left: 3px solid #FF8C00;
+        }
+        .gif-preview-large {
+            flex: 1;
+            min-width: 100px;
+            max-width: 130px;
+        }
+        .gif-preview-large img {
+            width: 100%;
+            max-height: 100px;
+            object-fit: contain;
+            border-radius: 16px;
+            background: #00000050;
+            border: 1px solid #FFA50060;
+        }
+        .gif-placeholder {
+            font-size: 0.7rem;
+            color: #8f9bb3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+        .gif-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .gif-btn {
+            background: #1f2a36;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .gif-btn:active { background: #FF8C00; color: black; }
+        .start-workout-btn {
+            background: linear-gradient(135deg, #FF8C00, #FFA500);
+            border: none;
+            width: calc(100% - 36px);
+            margin: 20px 18px;
+            padding: 14px;
+            border-radius: 60px;
+            font-weight: 800;
+            font-size: 1rem;
+            color: #0a0c10;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .start-workout-btn:active { transform: scale(0.97); }
+        .start-workout-btn.completed {
+            background: #2a7a3e;
+            color: white;
+        }
+        .progress-footer {
+            background: #0e121b;
+            border-radius: 32px;
+            padding: 12px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 8px;
+        }
+        .progress-bar-bg {
+            flex: 2;
+            height: 8px;
+            background: #262e3a;
+            border-radius: 10px;
+            margin: 0 12px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #FFA500, #FFD966);
+        }
+        .week-controls {
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+            justify-content: center;
+        }
+        .week-btn {
+            background: #1f2937;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 40px;
+            color: white;
+            font-size: 0.75rem;
+            cursor: pointer;
+        }
+        /* Botões inferiores */
+        .bottom-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+            margin-bottom: 20px;
+        }
+        .action-btn {
+            background: linear-gradient(135deg, #2a3a4a, #1f2a36);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: white;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .action-btn i { color: #FFA500; }
+        .action-btn:active { transform: scale(0.97); }
+        /* Modal relatório */
+        .modal-report {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        .report-content {
+            background: #1a212e;
+            border-radius: 32px;
+            padding: 24px;
+            max-width: 550px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            color: #eef2ff;
+            border: 1px solid #FF8C00;
+        }
+        .report-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #FFD966;
+        }
+        .report-week {
+            background: #0f141c;
+            padding: 12px;
+            border-radius: 24px;
+            margin-bottom: 20px;
+        }
+        .progress-item {
+            border-bottom: 1px solid #2a3542;
+            padding: 10px 0;
+        }
+        .progress-item strong {
+            color: #FFA500;
+        }
+        .progress-badge {
+            display: inline-block;
+            margin-left: 10px;
+            font-size: 0.7rem;
+            background: #2a7a3e;
+            padding: 2px 8px;
+            border-radius: 20px;
+        }
+        .regress-badge {
+            background: #8b3a3a;
+        }
+        .neutral-badge {
+            background: #5a5a5a;
+        }
+        .close-report {
+            background: #FF8C00;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-weight: bold;
+            margin-top: 20px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background: #1a212e;
+            border-radius: 32px;
+            padding: 24px;
+            width: 90%;
+            max-width: 320px;
+            text-align: center;
+        }
+        .modal-content input {
+            width: 100%;
+            padding: 12px;
+            margin: 16px 0;
+            border-radius: 60px;
+            border: none;
+            background: #0f141c;
+            color: white;
+        }
+        .modal-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+        .modal-btn {
+            padding: 8px 18px;
+            border-radius: 40px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .modal-btn.confirm { background: #FF8C00; color: black; }
+        .modal-btn.cancel { background: #2a313e; color: white; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="plan-header">
+        <h1><i class="fas fa-dumbbell"></i> Meu Plano PPL · IwFa Fitenss </h1>
+    </div>
+
+    <div class="days-tabs" id="daysTabs">
+        <button class="tab-day" data-day="1">DIA 1 (A)</button>
+        <button class="tab-day" data-day="2">DIA 2 (B)</button>
+        <button class="tab-day" data-day="3">DIA 3 (C)</button>
+        <button class="tab-day" data-day="4">DIA 4 (A)</button>
+        <button class="tab-day" data-day="5">DIA 5 (B)</button>
+        <button class="tab-day" data-day="6">DIA 6 (C)</button>
+    </div>
+
+    <div id="dayContent"></div>
+
+    <div class="progress-footer">
+        <span class="week-range" id="weekRangeDisplay">Semana</span>
+        <div class="progress-bar-bg"><div id="progressFill" class="progress-fill"></div></div>
+        <span id="completedCount">0</span>/<span id="totalDays">6</span>
+    </div>
+    <div class="week-controls">
+        <button id="prevWeekBtn" class="week-btn"><i class="fas fa-chevron-left"></i> Semana anterior</button>
+        <button id="todayWeekBtn" class="week-btn"><i class="fas fa-calendar-day"></i> Hoje</button>
+        <button id="nextWeekBtn" class="week-btn">Próxima semana <i class="fas fa-chevron-right"></i></button>
+    </div>
+    
+    <!-- Botões inferiores -->
+    <div class="bottom-actions">
+        <button id="saveBtn" class="action-btn"><i class="fas fa-save"></i> Salvar</button>
+        <button id="reportBtn" class="action-btn"><i class="fas fa-chart-line"></i> Gerar Relatório Semanal</button>
+    </div>
+</div>
+
+<!-- Modal URL GIF -->
+<div id="urlModal" class="modal">
+    <div class="modal-content">
+        <h3><i class="fas fa-link"></i> URL do GIF</h3>
+        <input type="text" id="modalUrlInput" placeholder="https://exemplo.com/exercicio.gif">
+        <div class="modal-buttons">
+            <button id="modalConfirmBtn" class="modal-btn confirm">Adicionar</button>
+            <button id="modalCancelBtn" class="modal-btn cancel">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Relatório -->
+<div id="reportModal" class="modal-report">
+    <div class="report-content" id="reportContent">
+        <!-- dinâmico -->
+    </div>
+</div>
+
+<script>
+    // ---------- TREINO PPL OTIMIZADO ----------
+    const workoutsByDay = {
+        1: { name: "PUSH · Peito / Ombro / Tríceps", muscles: ["Peito","Ombros","Tríceps"], timeMin: 70,
+            exercises: [
+                { name: "Supino reto (barra/máquina)", defaultSeries: "4", defaultReps: "8-10", defaultLoad: "40" },
+                { name: "Supino inclinado (halteres)", defaultSeries: "3", defaultReps: "10-12", defaultLoad: "12" },
+                { name: "Crucifixo (fly máquina/halter)", defaultSeries: "3", defaultReps: "10-12", defaultLoad: "10" },
+                { name: "Desenvolvimento (barra/halter)", defaultSeries: "4", defaultReps: "8-10", defaultLoad: "30" },
+                { name: "Elevação lateral (halteres)", defaultSeries: "3", defaultReps: "12-15", defaultLoad: "6" },
+                { name: "Tríceps corda na polia", defaultSeries: "3", defaultReps: "10-12", defaultLoad: "15" }
+            ] },
+        2: { name: "PULL · Costas / Bíceps / Abdômen", muscles: ["Costas","Bíceps","Abdômen"], timeMin: 60,
+            exercises: [
+                { name: "Puxada aberta frontal (pronada)", defaultSeries: "4", defaultReps: "8-10", defaultLoad: "50" },
+                { name: "Remada curvada (barra/halter)", defaultSeries: "4", defaultReps: "8-10", defaultLoad: "40" },
+                { name: "Remada baixa (triângulo)", defaultSeries: "3", defaultReps: "10-12", defaultLoad: "35" },
+                { name: "Rosca direta (barra W)", defaultSeries: "3", defaultReps: "10-12", defaultLoad: "15" },
+                { name: "Rosca martelo (halteres)", defaultSeries: "3", defaultReps: "10-12", defaultLoad: "10" },
+                { name: "Prancha isométrica", defaultSeries: "3", defaultReps: "40s", defaultLoad: "--" }
+            ] },
+        3: { name: "LEGS · Pernas completo", muscles: ["Quadríceps","Posterior","Glúteos","Panturrilha"], timeMin: 70,
+            exercises: [
+                { name: "Leg press 45°", defaultSeries: "4", defaultReps: "10-12", defaultLoad: "100" },
+                { name: "Cadeira extensora", defaultSeries: "3", defaultReps: "12-15", defaultLoad: "40" },
+                { name: "Cadeira flexora (mesa flexora)", defaultSeries: "4", defaultReps: "10-12", defaultLoad: "30" },
+                { name: "Stiff (halteres/barra)", defaultSeries: "3", defaultReps: "10-12", defaultLoad: "30" },
+                { name: "Elevação pélvica", defaultSeries: "3", defaultReps: "12-15", defaultLoad: "20" },
+                { name: "Panturrilha em pé", defaultSeries: "4", defaultReps: "15-20", defaultLoad: "60" }
+            ] },
+        4: { name: "PUSH · Peito / Ombro / Tríceps", muscles: ["Peito","Ombros","Tríceps"], timeMin: 70,
+            exercises: [
+                { name: "Supino reto (barra/máquina)", defaultSeries: "4", defaultReps: "8-10", defaultLoad: "40" },
+                { name: "Supino inclinado (halteres)", defaultSeries: "3", defaultReps: "10-12", defaultLoad: "12" },
+                { name: "Crucifixo (fly máquina/halter)", defaultSeries: "3", defaultReps: "10-12", defaultLoad: "10" },
+                { name: "Desenvolvimento (barra/halter)", defaultSeries: "4", defaultReps: "8-10", defaultLoad: "30" },
+                { name: "Elevação lateral (halteres)", defaultSeries: "3", defaultReps: "12-15", defaultLoad: "6" },
+                { name: "Tríceps corda na polia", defaultSeries: "3", defaultReps: "10-12", defaultLoad: "15" }
+            ] },
+        5: { name: "PULL · Costas / Bíceps / Abdômen", muscles: ["Costas","Bíceps","Abdômen"], timeMin: 60,
+            exercises: [
+                { name: "Puxada aberta frontal (pronada)", defaultSeries: "4", defaultReps: "8-10", defaultLoad: "50" },
+                { name: "Remada curvada (barra/halter)", defaultSeries: "4", defaultReps: "8-10", defaultLoad: "40" },
+                { name: "Remada baixa (triângulo)", defaultSeries: "3", defaultReps: "10-12", defaultLoad: "35" },
+                { name: "Rosca direta (barra W)", defaultSeries: "3", defaultReps: "10-12", defaultLoad: "15" },
+                { name: "Rosca martelo (halteres)", defaultSeries: "3", defaultReps: "10-12", defaultLoad: "10" },
+                { name: "Prancha isométrica", defaultSeries: "3", defaultReps: "40s", defaultLoad: "--" }
+            ] },
+        6: { name: "LEGS · Pernas completo", muscles: ["Quadríceps","Posterior","Glúteos","Panturrilha"], timeMin: 70,
+            exercises: [
+                { name: "Leg press 45°", defaultSeries: "4", defaultReps: "10-12", defaultLoad: "100" },
+                { name: "Cadeira extensora", defaultSeries: "3", defaultReps: "12-15", defaultLoad: "40" },
+                { name: "Cadeira flexora (mesa flexora)", defaultSeries: "4", defaultReps: "10-12", defaultLoad: "30" },
+                { name: "Stiff (halteres/barra)", defaultSeries: "3", defaultReps: "10-12", defaultLoad: "30" },
+                { name: "Elevação pélvica", defaultSeries: "3", defaultReps: "12-15", defaultLoad: "20" },
+                { name: "Panturrilha em pé", defaultSeries: "4", defaultReps: "15-20", defaultLoad: "60" }
+            ] }
+    };
+
+    // Storage helpers
+    function getWorkoutKey(dateObj) { return `workout_${formatYMD(dateObj)}`; }
+    function isWorkoutDone(dateObj) { return localStorage.getItem(getWorkoutKey(dateObj)) === 'true'; }
+    function setWorkoutDone(dateObj, done) { done ? localStorage.setItem(getWorkoutKey(dateObj),'true') : localStorage.removeItem(getWorkoutKey(dateObj)); renderCurrentDay(); updateProgress(); }
+    function getLoad(day, idx) { return localStorage.getItem(`load_${day}_${idx}`) ?? workoutsByDay[day].exercises[idx].defaultLoad; }
+    function setLoad(day, idx, val) { localStorage.setItem(`load_${day}_${idx}`, val); }
+    function getSeries(day, idx) { return localStorage.getItem(`series_${day}_${idx}`) ?? workoutsByDay[day].exercises[idx].defaultSeries; }
+    function setSeries(day, idx, val) { localStorage.setItem(`series_${day}_${idx}`, val); }
+    function getReps(day, idx) { return localStorage.getItem(`reps_${day}_${idx}`) ?? workoutsByDay[day].exercises[idx].defaultReps; }
+    function setReps(day, idx, val) { localStorage.setItem(`reps_${day}_${idx}`, val); }
+    function getGif(day, idx) { return localStorage.getItem(`gif_${day}_${idx}`); }
+    function setGif(day, idx, url) { if(url) localStorage.setItem(`gif_${day}_${idx}`, url); else localStorage.removeItem(`gif_${day}_${idx}`); renderCurrentDay(); }
+
+    // Datas
+    function getMondayOfCurrentWeek(ref = new Date()) {
+        const d = new Date(ref);
+        const day = d.getDay();
+        const diff = day === 0 ? -6 : 1 - day;
+        const monday = new Date(d);
+        monday.setDate(d.getDate() + diff);
+        monday.setHours(0,0,0,0);
+        return monday;
+    }
+    function getDateOfWeekday(monday, wd) { let d = new Date(monday); d.setDate(monday.getDate() + (wd-1)); return d; }
+    function formatYMD(d) { return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
+    function formatBR(d) { return d.toLocaleDateString('pt-BR', {day:'2-digit', month:'2-digit'}); }
+
+    let currentMonday = getMondayOfCurrentWeek();
+    let activeDay = 1;
+
+    // Render do dia ativo
+    function renderCurrentDay() {
+        const dateObj = getDateOfWeekday(currentMonday, activeDay);
+        const workout = workoutsByDay[activeDay];
+        if (!workout) return;
+        const done = isWorkoutDone(dateObj);
+        
+        const settingsHtml = `
+            <div class="workout-settings">
+                <div class="setting-item"><i class="fas fa-hourglass-half"></i> ${workout.timeMin}min</div>
+                <div class="setting-item"><i class="fas fa-muscle"></i> ${workout.muscles.length} Músculos</div>
+                <div class="setting-item"><i class="fas fa-university"></i> Academia Graduada</div>
+            </div>
+            <div class="muscles-area">
+                <div class="muscles-title">MÚSCULOS TRABALHADOS</div>
+                <div class="muscle-tags">${workout.muscles.map(m => `<span class="muscle-tag">${m}</span>`).join('')}</div>
+            </div>
+        `;
+        
+        let exercisesHtml = '';
+        workout.exercises.forEach((ex, idx) => {
+            const currentLoad = getLoad(activeDay, idx);
+            const currentSeries = getSeries(activeDay, idx);
+            const currentReps = getReps(activeDay, idx);
+            const gifUrl = getGif(activeDay, idx);
+            let gifBlock = '';
+            if (gifUrl) {
+                gifBlock = `<div class="gif-container"><div class="gif-preview-large"><img src="${gifUrl}" alt="GIF" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'gif-placeholder\'><i class=\'fas fa-broken-image\'></i> GIF inválido</div>'"></div><div class="gif-actions"><button class="gif-btn upload-gif" data-day="${activeDay}" data-ex="${idx}"><i class="fas fa-upload"></i> Novo GIF</button><button class="gif-btn url-gif" data-day="${activeDay}" data-ex="${idx}"><i class="fas fa-link"></i> URL</button><button class="gif-btn remove-gif" data-day="${activeDay}" data-ex="${idx}"><i class="fas fa-trash-alt"></i> Remover</button></div></div>`;
+            } else {
+                gifBlock = `<div class="gif-container"><div class="gif-placeholder"><i class="fas fa-play-circle fa-2x"></i><span>Adicione um GIF demonstrativo</span></div><div class="gif-actions"><button class="gif-btn upload-gif" data-day="${activeDay}" data-ex="${idx}"><i class="fas fa-upload"></i> Enviar GIF</button><button class="gif-btn url-gif" data-day="${activeDay}" data-ex="${idx}"><i class="fas fa-link"></i> URL do GIF</button></div></div>`;
+            }
+            exercisesHtml += `<div class="exercise-item"><div class="exercise-name"><i class="fas fa-dumbbell"></i> ${ex.name}</div><div class="exercise-fields-row"><div class="field"><label>SÉRIES</label><input type="text" class="series-input" data-day="${activeDay}" data-ex="${idx}" value="${currentSeries}"></div><div class="field"><label>REPS</label><input type="text" class="reps-input" data-day="${activeDay}" data-ex="${idx}" value="${currentReps}"></div><div class="field"><label>CARGA (kg)</label><input type="text" class="load-input" data-day="${activeDay}" data-ex="${idx}" value="${currentLoad}"></div></div>${gifBlock}</div>`;
+        });
+        
+        const btnText = done ? 'TREINO CONCLUÍDO ✅' : 'INICIAR TREINO';
+        const btnClass = done ? 'start-workout-btn completed' : 'start-workout-btn';
+        document.getElementById('dayContent').innerHTML = `<div class="workout-card">${settingsHtml}<div class="exercises-list">${exercisesHtml}</div><button class="${btnClass}" id="startWorkoutBtn" data-date="${formatYMD(dateObj)}">${btnText} <i class="fas fa-arrow-right"></i></button></div>`;
+        
+        attachExerciseEvents();
+        const startBtn = document.getElementById('startWorkoutBtn');
+        if(startBtn) startBtn.addEventListener('click', () => { const d = new Date(startBtn.dataset.date); setWorkoutDone(d, !isWorkoutDone(d)); if(!isWorkoutDone(d) && activeDay<6) setTimeout(()=>setActiveDay(activeDay+1),300); });
+    }
+    
+    function attachExerciseEvents() {
+        document.querySelectorAll('.load-input').forEach(inp => inp.addEventListener('change', (e) => { setLoad(parseInt(inp.dataset.day), parseInt(inp.dataset.ex), inp.value); }));
+        document.querySelectorAll('.series-input').forEach(inp => inp.addEventListener('change', (e) => { setSeries(parseInt(inp.dataset.day), parseInt(inp.dataset.ex), inp.value); }));
+        document.querySelectorAll('.reps-input').forEach(inp => inp.addEventListener('change', (e) => { setReps(parseInt(inp.dataset.day), parseInt(inp.dataset.ex), inp.value); }));
+        document.querySelectorAll('.upload-gif').forEach(btn => btn.addEventListener('click', (e) => { const day = parseInt(btn.dataset.day), ex = parseInt(btn.dataset.ex); const input = document.createElement('input'); input.type='file'; input.accept='image/gif'; input.onchange=(ev)=>{ const file=ev.target.files[0]; if(file && file.type==='image/gif'){ const reader=new FileReader(); reader.onload=(er)=>setGif(day, ex, er.target.result); reader.readAsDataURL(file); } else alert('Selecione um .gif'); }; input.click(); }));
+        document.querySelectorAll('.url-gif').forEach(btn => btn.addEventListener('click', (e) => { showUrlModal(parseInt(btn.dataset.day), parseInt(btn.dataset.ex)); }));
+        document.querySelectorAll('.remove-gif').forEach(btn => btn.addEventListener('click', (e) => { setGif(parseInt(btn.dataset.day), parseInt(btn.dataset.ex), null); }));
+    }
+    
+    let pendingGif = null;
+    function showUrlModal(day, ex) { pendingGif = {day, ex}; document.getElementById('urlModal').style.display = 'flex'; document.getElementById('modalUrlInput').value = ''; }
+    document.getElementById('modalConfirmBtn').onclick = () => { const url = document.getElementById('modalUrlInput').value.trim(); if(pendingGif && url && (url.startsWith('http')||url.startsWith('//'))) setGif(pendingGif.day, pendingGif.ex, url); else if(url) alert('URL inválida'); document.getElementById('urlModal').style.display = 'none'; pendingGif=null; };
+    document.getElementById('modalCancelBtn').onclick = () => { document.getElementById('urlModal').style.display = 'none'; pendingGif=null; };
+    window.onclick = (e) => { if(e.target === document.getElementById('urlModal')) document.getElementById('urlModal').style.display = 'none'; };
+    
+    function updateProgress() {
+        let completed = 0;
+        for(let i=1;i<=6;i++) if(isWorkoutDone(getDateOfWeekday(currentMonday, i))) completed++;
+        document.getElementById('completedCount').innerText = completed;
+        const percent = Math.floor((completed/6)*100);
+        document.getElementById('progressFill').style.width = `${percent}%`;
+        const startStr = formatBR(getDateOfWeekday(currentMonday,1)), endStr = formatBR(getDateOfWeekday(currentMonday,6));
+        document.getElementById('weekRangeDisplay').innerHTML = `<i class="fas fa-calendar-alt"></i> ${startStr} - ${endStr}`;
+    }
+    function setActiveDay(day) { activeDay = day; document.querySelectorAll('.tab-day').forEach(tab => { if(parseInt(tab.dataset.day)===activeDay) tab.classList.add('active'); else tab.classList.remove('active'); }); renderCurrentDay(); updateProgress(); }
+    function navigateWeek(delta) { const nd = new Date(currentMonday); nd.setDate(currentMonday.getDate() + delta*7); currentMonday = nd; updateProgress(); setActiveDay(activeDay); }
+    function goToCurrentWeek() { currentMonday = getMondayOfCurrentWeek(new Date()); updateProgress(); setActiveDay(activeDay); }
+    
+    // Botão Salvar (apenas notifica, mas os dados já estão salvos no localStorage)
+    document.getElementById('saveBtn').addEventListener('click', () => { alert('✅ Todos os dados (cargas, treinos concluídos, GIFs) já estão salvos automaticamente no navegador.'); });
+    
+    // Relatório Semanal
+    function getPreviousWeekMonday(monday) { const prev = new Date(monday); prev.setDate(monday.getDate() - 7); return prev; }
+    function getLoadPrevious(day, idx, mondayRef) { const prevMonday = getPreviousWeekMonday(mondayRef); const prevDate = getDateOfWeekday(prevMonday, day); const key = `load_${day}_${idx}`; return localStorage.getItem(key) ?? workoutsByDay[day].exercises[idx].defaultLoad; }
+    function gerarRelatorio() {
+        const monday = currentMonday;
+        const weekDates = [];
+        for(let i=1;i<=6;i++) weekDates.push(getDateOfWeekday(monday, i));
+        let totalTime = 0;
+        let completedCount = 0;
+        for(let i=1;i<=6;i++) { if(isWorkoutDone(getDateOfWeekday(monday, i))) { completedCount++; totalTime += workoutsByDay[i].timeMin; } }
+        const html = [];
+        html.push(`<h3><i class="fas fa-chart-line"></i> Relatório Semanal</h3>`);
+        html.push(`<div class="report-week"><strong>Período:</strong> ${formatBR(weekDates[0])} a ${formatBR(weekDates[5])}<br><strong>Treinos realizados:</strong> ${completedCount}/6<br><strong>Tempo total estimado:</strong> ${totalTime} minutos</div>`);
+        html.push(`<div><strong>📊 Progressão de Carga (semana atual vs anterior)</strong></div>`);
+        for(let day=1; day<=6; day++) {
+            const workout = workoutsByDay[day];
+            if(!workout) continue;
+            html.push(`<div style="margin-top:15px;"><i class="fas fa-calendar-day"></i> <strong>Dia ${day} (${workout.name.split('·')[0]})</strong></div>`);
+            workout.exercises.forEach((ex, idx) => {
+                const cargaAtual = getLoad(day, idx);
+                const cargaAnterior = getLoadPrevious(day, idx, monday);
+                let diff = "";
+                let badge = "";
+                if(cargaAtual !== "--" && cargaAnterior !== "--") {
+                    const numAtual = parseFloat(cargaAtual);
+                    const numAnt = parseFloat(cargaAnterior);
+                    if(!isNaN(numAtual) && !isNaN(numAnt)) {
+                        if(numAtual > numAnt) { diff = ` (+${(numAtual-numAnt).toFixed(1)} kg)`; badge = `<span class="progress-badge">↑ Evolução</span>`; }
+                        else if(numAtual < numAnt) { diff = ` (${(numAtual-numAnt).toFixed(1)} kg ↓)`; badge = `<span class="progress-badge regress-badge">↓ Regressão</span>`; }
+                        else { diff = ` (estável)`; badge = `<span class="progress-badge neutral-badge">➖ Estável</span>`; }
+                    } else { diff = ""; badge = `<span class="progress-badge neutral-badge">⚪ Comparação não numérica</span>`; }
+                } else { diff = ""; badge = `<span class="progress-badge neutral-badge">⚪ Carga especial</span>`; }
+                html.push(`<div class="progress-item"><strong>${ex.name}</strong><br>Carga atual: ${cargaAtual} kg | Anterior: ${cargaAnterior} kg ${diff} ${badge}</div>`);
+            });
+        }
+        html.push(`<button id="closeReportBtn" class="close-report"><i class="fas fa-times-circle"></i> Fechar</button>`);
+        document.getElementById('reportContent').innerHTML = html.join('');
+        document.getElementById('reportModal').style.display = 'flex';
+        document.getElementById('closeReportBtn').addEventListener('click', () => { document.getElementById('reportModal').style.display = 'none'; });
+    }
+    document.getElementById('reportBtn').addEventListener('click', gerarRelatorio);
+    window.onclick = (e) => { if(e.target === document.getElementById('reportModal')) document.getElementById('reportModal').style.display = 'none'; };
+    
+    // Inicialização
+    function initTabs() { document.querySelectorAll('.tab-day').forEach(tab => tab.addEventListener('click', () => setActiveDay(parseInt(tab.dataset.day)))); }
+    document.getElementById('prevWeekBtn').addEventListener('click', () => navigateWeek(-1));
+    document.getElementById('nextWeekBtn').addEventListener('click', () => navigateWeek(1));
+    document.getElementById('todayWeekBtn').addEventListener('click', goToCurrentWeek);
+    initTabs();
+    setActiveDay(1);
+</script>
+</body>
+</html>

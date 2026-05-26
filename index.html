@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>IWFA Fitness | PPL Otimizado</title>
+    <title>IWFA Fitness | PPL Otimizado 42 anos</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -25,6 +25,7 @@
         }
         .plan-header {
             margin-bottom: 20px;
+            text-align: center;
         }
         .plan-header h1 {
             font-size: 1.9rem;
@@ -35,6 +36,7 @@
             color: transparent;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
         }
         .days-tabs {
@@ -72,9 +74,53 @@
             overflow: hidden;
             margin-bottom: 20px;
         }
-        .workout-settings {
+        .top-actions {
             background: #1a212e;
             padding: 14px 18px;
+            display: flex;
+            gap: 12px;
+            justify-content: space-between;
+            border-bottom: 1px solid #29313e;
+        }
+        .btn-treino {
+            flex: 1;
+            background: #2a3a4a;
+            border: none;
+            padding: 12px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
+        .btn-iniciar {
+            background: linear-gradient(135deg, #FF8C00, #FFA500);
+            color: #0a0c10;
+        }
+        .btn-finalizar {
+            background: #2a7a3e;
+        }
+        .btn-finalizar:active, .btn-iniciar:active { transform: scale(0.97); }
+        .timer-display {
+            background: #0f141c;
+            padding: 8px 16px;
+            border-radius: 40px;
+            font-family: monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #FFD966;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .workout-settings {
+            background: #1a212e;
+            padding: 12px 18px;
             border-bottom: 1px solid #29313e;
             display: flex;
             justify-content: space-between;
@@ -96,6 +142,7 @@
             background: #0f141c;
             padding: 12px 18px;
             border-bottom: 1px solid #29313e;
+            text-align: center;
         }
         .muscles-title {
             font-size: 0.7rem;
@@ -108,6 +155,7 @@
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
+            justify-content: center;
         }
         .muscle-tag {
             background: #1f2a36;
@@ -126,147 +174,108 @@
             flex-direction: column;
             gap: 12px;
         }
+        /* Linha com imagem à esquerda e conteúdo à direita */
+        .exercise-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+        .gif-left {
+            flex-shrink: 0;
+            background: #080c12;
+            border-radius: 16px;
+            padding: 6px;
+            border: 1px solid #FFA50060;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            width: 100px;
+        }
+        .gif-left img {
+            max-width: 80px;
+            max-height: 70px;
+            object-fit: contain;
+            border-radius: 12px;
+        }
+        .gif-left-placeholder {
+            width: 80px;
+            height: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #8f9bb3;
+            font-size: 0.6rem;
+            text-align: center;
+        }
+        .gif-icon-buttons {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+        }
+        .gif-icon-btn {
+            background: #1f2a36;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 30px;
+            cursor: pointer;
+            color: white;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+        .gif-icon-btn:active { background: #FF8C00; color: black; }
+        .exercise-details {
+            flex: 1;
+            min-width: 150px;
+        }
         .exercise-name {
             font-weight: 700;
             font-size: 1rem;
             display: flex;
             align-items: center;
             gap: 8px;
+            margin-bottom: 8px;
         }
         .exercise-name i { color: #FF8C00; }
-        .exercise-fields-row {
-            display: flex;
-            flex-wrap: wrap;
+        .exercise-row-fields {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 12px;
-            margin-bottom: 8px;
+            margin-top: 6px;
         }
         .field {
             background: #0b1018;
             border-radius: 28px;
-            padding: 4px 12px;
+            padding: 6px 8px;
             display: flex;
             align-items: center;
+            justify-content: space-between;
             gap: 6px;
             border: 1px solid #2a3542;
         }
         .field label {
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             color: #aaa;
+            font-weight: 500;
         }
         .field input {
             background: transparent;
             border: none;
             color: #FFD966;
             font-weight: 600;
-            width: 55px;
+            width: 65px;
             font-size: 0.9rem;
             text-align: center;
             font-family: monospace;
         }
         .field input:focus { outline: none; }
         
-        /* Séries checkboxes */
-        .series-checkboxes {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            align-items: center;
-            margin: 8px 0;
-        }
-        .series-check {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            background: #1a212c;
-            padding: 4px 12px;
-            border-radius: 30px;
-            font-size: 0.7rem;
-        }
-        .series-check input {
-            width: 18px;
-            height: 18px;
-            accent-color: #FF8C00;
-            cursor: pointer;
-        }
-        
-        /* GIF centralizado */
-        .gif-container {
-            margin-top: 8px;
-            background: #080c12;
-            border-radius: 20px;
-            padding: 12px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-            border-left: 3px solid #FF8C00;
-            width: 100%;
-        }
-        .gif-preview-large {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-        }
-        .gif-preview-large img {
-            max-width: 140px;
-            max-height: 110px;
-            object-fit: contain;
-            border-radius: 16px;
-            background: #00000050;
-            border: 1px solid #FFA50060;
-        }
-        .gif-placeholder {
-            font-size: 0.7rem;
-            color: #8f9bb3;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            text-align: center;
-        }
-        .gif-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            justify-content: center;
-        }
-        .gif-btn {
-            background: #1f2a36;
-            border: none;
-            padding: 6px 14px;
-            border-radius: 30px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            cursor: pointer;
-            color: white;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .gif-btn:active { background: #FF8C00; color: black; }
-        
-        .start-workout-btn {
-            background: linear-gradient(135deg, #FF8C00, #FFA500);
-            border: none;
-            width: calc(100% - 36px);
-            margin: 20px 18px;
-            padding: 14px;
-            border-radius: 60px;
-            font-weight: 800;
-            font-size: 1rem;
-            color: #0a0c10;
-            cursor: pointer;
-            transition: 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        .start-workout-btn:active { transform: scale(0.97); }
-        .start-workout-btn.completed {
-            background: #2a7a3e;
-            color: white;
-        }
         .progress-footer {
             background: #0e121b;
             border-radius: 32px;
@@ -324,7 +333,6 @@
             align-items: center;
             gap: 10px;
             transition: 0.2s;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
         .action-btn i { color: #FFA500; }
         .action-btn:active { transform: scale(0.97); }
@@ -380,7 +388,6 @@
             border-radius: 20px;
         }
         .regress-badge { background: #8b3a3a; }
-        .neutral-badge { background: #5a5a5a; }
         .close-report {
             background: #FF8C00;
             border: none;
@@ -414,12 +421,34 @@
         }
         .modal-btn.confirm { background: #FF8C00; color: black; }
         .modal-btn.cancel { background: #2a313e; color: white; }
+        /* tooltip simples */
+        [data-tooltip] {
+            position: relative;
+        }
+        [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 120%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #000000cc;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 0.65rem;
+            white-space: nowrap;
+            display: none;
+            z-index: 10;
+        }
+        [data-tooltip]:hover:before {
+            display: block;
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="plan-header">
-        <h1><i class="fas fa-dumbbell"></i> Meu Plano PPL · IWFA Fitness </h1>
+        <h1><i class="fas fa-dumbbell"></i> Meu Plano PPL · 42 anos</h1>
     </div>
     <div class="days-tabs" id="daysTabs">
         <button class="tab-day" data-day="1">DIA 1 (A)</button>
@@ -460,7 +489,7 @@
 </div>
 
 <script>
-    // Base de treinos (igual anterior)
+    // Base de treinos (idêntica à versão anterior)
     const workoutsByDay = {
         1: { name: "PUSH · Peito / Ombro / Tríceps", muscles: ["Peito","Ombros","Tríceps"], timeMin: 70,
             exercises: [
@@ -518,10 +547,12 @@
             ] }
     };
 
-    // Storage helpers
+    // Storage helpers (idênticos)
     function getWorkoutKey(dateObj) { return `workout_${formatYMD(dateObj)}`; }
     function isWorkoutDone(dateObj) { return localStorage.getItem(getWorkoutKey(dateObj)) === 'true'; }
     function setWorkoutDone(dateObj, done) { done ? localStorage.setItem(getWorkoutKey(dateObj),'true') : localStorage.removeItem(getWorkoutKey(dateObj)); renderCurrentDay(); updateProgress(); }
+    function getWorkoutTime(dateObj) { const key = `time_${formatYMD(dateObj)}`; const val = localStorage.getItem(key); return val ? parseInt(val) : 0; }
+    function setWorkoutTime(dateObj, seconds) { localStorage.setItem(`time_${formatYMD(dateObj)}`, seconds); }
     function getLoad(day, idx) { return localStorage.getItem(`load_${day}_${idx}`) ?? workoutsByDay[day].exercises[idx].defaultLoad; }
     function setLoad(day, idx, val) { localStorage.setItem(`load_${day}_${idx}`, val); renderCurrentDay(); }
     function getSeries(day, idx) { return localStorage.getItem(`series_${day}_${idx}`) ?? workoutsByDay[day].exercises[idx].defaultSeries; }
@@ -530,30 +561,35 @@
     function setReps(day, idx, val) { localStorage.setItem(`reps_${day}_${idx}`, val); renderCurrentDay(); }
     function getGif(day, idx) { return localStorage.getItem(`gif_${day}_${idx}`); }
     function setGif(day, idx, url) { if(url) localStorage.setItem(`gif_${day}_${idx}`, url); else localStorage.removeItem(`gif_${day}_${idx}`); renderCurrentDay(); }
-    // Checkboxes de séries individuais: salvar como array de booleans
-    function getSeriesChecks(day, idx, totalSeries) {
-        const key = `series_checks_${day}_${idx}`;
-        const stored = localStorage.getItem(key);
-        if(stored) {
-            const arr = JSON.parse(stored);
-            while(arr.length < totalSeries) arr.push(false);
-            if(arr.length > totalSeries) arr.length = totalSeries;
-            return arr;
+
+    // Histórico para progressão
+    function salvarHistoricoCargas() {
+        const dataSegunda = formatYMD(currentMonday);
+        const historico = {};
+        for (let day = 1; day <= 6; day++) {
+            const workout = workoutsByDay[day];
+            if (!workout) continue;
+            historico[day] = {};
+            workout.exercises.forEach((_, idx) => { historico[day][idx] = getLoad(day, idx); });
         }
-        return Array(totalSeries).fill(false);
+        localStorage.setItem(`historico_semana_${dataSegunda}`, JSON.stringify(historico));
     }
-    function setSeriesChecks(day, idx, checks) {
-        const key = `series_checks_${day}_${idx}`;
-        localStorage.setItem(key, JSON.stringify(checks));
-        renderCurrentDay(); // atualiza para refletir visual
-    }
-    function toggleSeriesCheck(day, idx, seriesIndex, totalSeries) {
-        const checks = getSeriesChecks(day, idx, totalSeries);
-        checks[seriesIndex] = !checks[seriesIndex];
-        setSeriesChecks(day, idx, checks);
+    function carregarHistoricoSemanaAnterior() {
+        const semanaPassada = new Date(currentMonday);
+        semanaPassada.setDate(currentMonday.getDate() - 7);
+        const dataAnterior = formatYMD(semanaPassada);
+        const stored = localStorage.getItem(`historico_semana_${dataAnterior}`);
+        return stored ? JSON.parse(stored) : null;
     }
 
-    // Datas
+    // Datas e timer
+    let currentMonday = getMondayOfCurrentWeek();
+    let activeDay = 1;
+    let timerInterval = null;
+    let timerRunning = false;
+    let currentStartTime = null;
+    let currentElapsed = 0;
+
     function getMondayOfCurrentWeek(ref = new Date()) {
         const d = new Date(ref);
         const day = d.getDay();
@@ -567,14 +603,48 @@
     function formatYMD(d) { return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
     function formatBR(d) { return d.toLocaleDateString('pt-BR', {day:'2-digit', month:'2-digit'}); }
 
-    let currentMonday = getMondayOfCurrentWeek();
-    let activeDay = 1;
+    function startTimerForDay() {
+        if(timerInterval) clearInterval(timerInterval);
+        const dateObj = getDateOfWeekday(currentMonday, activeDay);
+        currentElapsed = getWorkoutTime(dateObj);
+        timerRunning = true;
+        currentStartTime = Date.now() - currentElapsed * 1000;
+        timerInterval = setInterval(() => {
+            if(timerRunning) {
+                const elapsed = Math.floor((Date.now() - currentStartTime) / 1000);
+                currentElapsed = elapsed;
+                const minutes = Math.floor(elapsed / 60);
+                const seconds = elapsed % 60;
+                const timerEl = document.getElementById('timerDisplay');
+                if(timerEl) timerEl.innerText = `${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+            }
+        }, 1000);
+    }
+    function stopTimerAndSave() {
+        if(timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+        if(timerRunning) {
+            setWorkoutTime(getDateOfWeekday(currentMonday, activeDay), currentElapsed);
+            timerRunning = false;
+        }
+    }
 
     function renderCurrentDay() {
         const dateObj = getDateOfWeekday(currentMonday, activeDay);
         const workout = workoutsByDay[activeDay];
         if (!workout) return;
         const done = isWorkoutDone(dateObj);
+        const savedTime = getWorkoutTime(dateObj);
+        const minutes = Math.floor(savedTime / 60);
+        const seconds = savedTime % 60;
+        const timerText = `${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+        
+        const topHtml = `
+            <div class="top-actions">
+                <button id="btnIniciar" class="btn-treino btn-iniciar" ${done ? 'disabled style="opacity:0.5;"' : ''}><i class="fas fa-play"></i> INICIAR TREINO</button>
+                <button id="btnFinalizar" class="btn-treino btn-finalizar" ${done ? 'disabled style="opacity:0.5;"' : ''}><i class="fas fa-stop"></i> FINALIZAR TREINO</button>
+                <div class="timer-display"><i class="fas fa-hourglass-half"></i> <span id="timerDisplay">${timerText}</span></div>
+            </div>
+        `;
         
         const settingsHtml = `
             <div class="workout-settings">
@@ -591,79 +661,120 @@
         let exercisesHtml = '';
         workout.exercises.forEach((ex, idx) => {
             const currentLoad = getLoad(activeDay, idx);
-            const currentSeries = parseInt(getSeries(activeDay, idx)) || 0;
+            const currentSeries = getSeries(activeDay, idx);
             const currentReps = getReps(activeDay, idx);
             const gifUrl = getGif(activeDay, idx);
             
-            // Checkboxes das séries
-            let seriesChecksHtml = '';
-            if(currentSeries > 0) {
-                const checks = getSeriesChecks(activeDay, idx, currentSeries);
-                seriesChecksHtml = `<div class="series-checkboxes">${checks.map((checked, sIdx) => `
-                    <label class="series-check">
-                        <input type="checkbox" class="series-checkbox" data-day="${activeDay}" data-ex="${idx}" data-series="${sIdx}" ${checked ? 'checked' : ''}>
-                        <span>Série ${sIdx+1}</span>
-                    </label>
-                `).join('')}</div>`;
-            } else {
-                seriesChecksHtml = `<div class="series-checkboxes" style="opacity:0.6;">Defina o número de séries acima</div>`;
-            }
-            
-            let gifBlock = '';
+            // Parte do GIF à esquerda
+            let gifLeftHtml = '';
             if (gifUrl) {
-                gifBlock = `<div class="gif-container"><div class="gif-preview-large"><img src="${gifUrl}" alt="GIF" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'gif-placeholder\'><i class=\'fas fa-broken-image\'></i> GIF inválido</div>'"></div><div class="gif-actions"><button class="gif-btn upload-gif" data-day="${activeDay}" data-ex="${idx}"><i class="fas fa-upload"></i> Novo GIF</button><button class="gif-btn url-gif" data-day="${activeDay}" data-ex="${idx}"><i class="fas fa-link"></i> URL</button><button class="gif-btn remove-gif" data-day="${activeDay}" data-ex="${idx}"><i class="fas fa-trash-alt"></i> Remover</button></div></div>`;
+                gifLeftHtml = `
+                    <div class="gif-left">
+                        <img src="${gifUrl}" alt="GIF" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'gif-left-placeholder\'><i class=\'fas fa-file-image\'></i><span>Erro</span></div>'">
+                        <div class="gif-icon-buttons">
+                            <button class="gif-icon-btn upload-gif" data-day="${activeDay}" data-ex="${idx}" data-tooltip="Enviar GIF"><i class="fas fa-upload"></i></button>
+                            <button class="gif-icon-btn url-gif" data-day="${activeDay}" data-ex="${idx}" data-tooltip="URL do GIF"><i class="fas fa-link"></i></button>
+                            <button class="gif-icon-btn remove-gif" data-day="${activeDay}" data-ex="${idx}" data-tooltip="Remover GIF"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </div>
+                `;
             } else {
-                gifBlock = `<div class="gif-container"><div class="gif-placeholder"><i class="fas fa-play-circle fa-2x"></i><span>Adicione um GIF demonstrativo</span></div><div class="gif-actions"><button class="gif-btn upload-gif" data-day="${activeDay}" data-ex="${idx}"><i class="fas fa-upload"></i> Enviar GIF</button><button class="gif-btn url-gif" data-day="${activeDay}" data-ex="${idx}"><i class="fas fa-link"></i> URL do GIF</button></div></div>`;
+                gifLeftHtml = `
+                    <div class="gif-left">
+                        <div class="gif-left-placeholder"><i class="fas fa-play-circle fa-2x"></i><span>GIF</span></div>
+                        <div class="gif-icon-buttons">
+                            <button class="gif-icon-btn upload-gif" data-day="${activeDay}" data-ex="${idx}" data-tooltip="Enviar GIF"><i class="fas fa-upload"></i></button>
+                            <button class="gif-icon-btn url-gif" data-day="${activeDay}" data-ex="${idx}" data-tooltip="URL do GIF"><i class="fas fa-link"></i></button>
+                        </div>
+                    </div>
+                `;
             }
             
             exercisesHtml += `
                 <div class="exercise-item">
-                    <div class="exercise-name"><i class="fas fa-dumbbell"></i> ${ex.name}</div>
-                    <div class="exercise-fields-row">
-                        <div class="field"><label>SÉRIES</label><input type="number" class="series-input" data-day="${activeDay}" data-ex="${idx}" value="${currentSeries}" step="1" min="0"></div>
-                        <div class="field"><label>REPS</label><input type="text" class="reps-input" data-day="${activeDay}" data-ex="${idx}" value="${currentReps}"></div>
-                        <div class="field"><label>CARGA (kg)</label><input type="text" class="load-input" data-day="${activeDay}" data-ex="${idx}" value="${currentLoad}"></div>
+                    <div class="exercise-header">
+                        ${gifLeftHtml}
+                        <div class="exercise-details">
+                            <div class="exercise-name"><i class="fas fa-dumbbell"></i> ${ex.name}</div>
+                            <div class="exercise-row-fields">
+                                <div class="field"><label>SÉRIES</label><input type="number" class="series-input" data-day="${activeDay}" data-ex="${idx}" value="${currentSeries}" step="1" min="0"></div>
+                                <div class="field"><label>REPS</label><input type="text" class="reps-input" data-day="${activeDay}" data-ex="${idx}" value="${currentReps}"></div>
+                                <div class="field"><label>CARGA (kg)</label><input type="text" class="load-input" data-day="${activeDay}" data-ex="${idx}" value="${currentLoad}"></div>
+                            </div>
+                        </div>
                     </div>
-                    ${seriesChecksHtml}
-                    ${gifBlock}
                 </div>
             `;
         });
         
-        const btnText = done ? 'TREINO CONCLUÍDO ✅' : 'INICIAR TREINO';
-        const btnClass = done ? 'start-workout-btn completed' : 'start-workout-btn';
-        document.getElementById('dayContent').innerHTML = `<div class="workout-card">${settingsHtml}<div class="exercises-list">${exercisesHtml}</div><button class="${btnClass}" id="startWorkoutBtn" data-date="${formatYMD(dateObj)}">${btnText} <i class="fas fa-arrow-right"></i></button></div>`;
+        const fullHtml = `<div class="workout-card">${topHtml}${settingsHtml}<div class="exercises-list">${exercisesHtml}</div></div>`;
+        document.getElementById('dayContent').innerHTML = fullHtml;
         
         attachExerciseEvents();
-        const startBtn = document.getElementById('startWorkoutBtn');
-        if(startBtn) startBtn.addEventListener('click', () => { const d = new Date(startBtn.dataset.date); setWorkoutDone(d, !isWorkoutDone(d)); if(!isWorkoutDone(d) && activeDay<6) setTimeout(()=>setActiveDay(activeDay+1),300); });
+        const btnIniciar = document.getElementById('btnIniciar');
+        const btnFinalizar = document.getElementById('btnFinalizar');
+        if(btnIniciar && !done) btnIniciar.addEventListener('click', () => { startTimerForDay(); });
+        if(btnFinalizar && !done) btnFinalizar.addEventListener('click', () => { 
+            stopTimerAndSave(); 
+            setWorkoutDone(getDateOfWeekday(currentMonday, activeDay), true);
+            if(activeDay < 6) setTimeout(()=>setActiveDay(activeDay+1), 300);
+        });
+        if(done) {
+            if(btnIniciar) btnIniciar.disabled = true;
+            if(btnFinalizar) btnFinalizar.disabled = true;
+        }
+        if(timerRunning && !done) {
+            const remaining = getWorkoutTime(getDateOfWeekday(currentMonday, activeDay));
+            currentElapsed = remaining;
+            currentStartTime = Date.now() - currentElapsed * 1000;
+            if(timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                if(timerRunning) {
+                    const elapsed = Math.floor((Date.now() - currentStartTime) / 1000);
+                    currentElapsed = elapsed;
+                    const minutes = Math.floor(elapsed / 60);
+                    const seconds = elapsed % 60;
+                    const timerEl = document.getElementById('timerDisplay');
+                    if(timerEl) timerEl.innerText = `${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+                }
+            }, 1000);
+        }
     }
     
     function attachExerciseEvents() {
-        // Campos editáveis
         document.querySelectorAll('.load-input').forEach(inp => inp.addEventListener('change', (e) => { setLoad(parseInt(inp.dataset.day), parseInt(inp.dataset.ex), inp.value); }));
         document.querySelectorAll('.series-input').forEach(inp => inp.addEventListener('change', (e) => { setSeries(parseInt(inp.dataset.day), parseInt(inp.dataset.ex), inp.value); }));
         document.querySelectorAll('.reps-input').forEach(inp => inp.addEventListener('change', (e) => { setReps(parseInt(inp.dataset.day), parseInt(inp.dataset.ex), inp.value); }));
         
-        // Checkboxes de séries
-        document.querySelectorAll('.series-checkbox').forEach(cb => cb.addEventListener('change', (e) => {
-            const day = parseInt(cb.dataset.day);
-            const ex = parseInt(cb.dataset.ex);
-            const seriesIdx = parseInt(cb.dataset.series);
-            const totalSeries = parseInt(getSeries(day, ex)) || 0;
-            toggleSeriesCheck(day, ex, seriesIdx, totalSeries);
+        document.querySelectorAll('.upload-gif').forEach(btn => btn.addEventListener('click', (e) => {
+            const day = parseInt(btn.dataset.day), ex = parseInt(btn.dataset.ex);
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/gif';
+            input.onchange = (ev) => {
+                const file = ev.target.files[0];
+                if(file && file.type === 'image/gif') {
+                    const reader = new FileReader();
+                    reader.onload = (er) => setGif(day, ex, er.target.result);
+                    reader.readAsDataURL(file);
+                } else alert('Selecione um arquivo .gif válido');
+            };
+            input.click();
         }));
-        
-        // GIF
-        document.querySelectorAll('.upload-gif').forEach(btn => btn.addEventListener('click', (e) => { const day = parseInt(btn.dataset.day), ex = parseInt(btn.dataset.ex); const input = document.createElement('input'); input.type='file'; input.accept='image/gif'; input.onchange=(ev)=>{ const file=ev.target.files[0]; if(file && file.type==='image/gif'){ const reader=new FileReader(); reader.onload=(er)=>setGif(day, ex, er.target.result); reader.readAsDataURL(file); } else alert('Selecione um .gif'); }; input.click(); }));
         document.querySelectorAll('.url-gif').forEach(btn => btn.addEventListener('click', (e) => { showUrlModal(parseInt(btn.dataset.day), parseInt(btn.dataset.ex)); }));
         document.querySelectorAll('.remove-gif').forEach(btn => btn.addEventListener('click', (e) => { setGif(parseInt(btn.dataset.day), parseInt(btn.dataset.ex), null); }));
     }
     
     let pendingGif = null;
     function showUrlModal(day, ex) { pendingGif = {day, ex}; document.getElementById('urlModal').style.display = 'flex'; document.getElementById('modalUrlInput').value = ''; }
-    document.getElementById('modalConfirmBtn').onclick = () => { const url = document.getElementById('modalUrlInput').value.trim(); if(pendingGif && url && (url.startsWith('http')||url.startsWith('//'))) setGif(pendingGif.day, pendingGif.ex, url); else if(url) alert('URL inválida'); document.getElementById('urlModal').style.display = 'none'; pendingGif=null; };
-    document.getElementById('modalCancelBtn').onclick = () => { document.getElementById('urlModal').style.display = 'none'; pendingGif=null; };
+    document.getElementById('modalConfirmBtn').onclick = () => {
+        const url = document.getElementById('modalUrlInput').value.trim();
+        if(pendingGif && url && (url.startsWith('http')||url.startsWith('//'))) setGif(pendingGif.day, pendingGif.ex, url);
+        else if(url) alert('URL inválida');
+        document.getElementById('urlModal').style.display = 'none';
+        pendingGif = null;
+    };
+    document.getElementById('modalCancelBtn').onclick = () => { document.getElementById('urlModal').style.display = 'none'; pendingGif = null; };
     window.onclick = (e) => { if(e.target === document.getElementById('urlModal')) document.getElementById('urlModal').style.display = 'none'; };
     
     function updateProgress() {
@@ -675,47 +786,78 @@
         const startStr = formatBR(getDateOfWeekday(currentMonday,1)), endStr = formatBR(getDateOfWeekday(currentMonday,6));
         document.getElementById('weekRangeDisplay').innerHTML = `<i class="fas fa-calendar-alt"></i> ${startStr} - ${endStr}`;
     }
-    function setActiveDay(day) { activeDay = day; document.querySelectorAll('.tab-day').forEach(tab => { if(parseInt(tab.dataset.day)===activeDay) tab.classList.add('active'); else tab.classList.remove('active'); }); renderCurrentDay(); updateProgress(); }
-    function navigateWeek(delta) { const nd = new Date(currentMonday); nd.setDate(currentMonday.getDate() + delta*7); currentMonday = nd; updateProgress(); setActiveDay(activeDay); }
-    function goToCurrentWeek() { currentMonday = getMondayOfCurrentWeek(new Date()); updateProgress(); setActiveDay(activeDay); }
+    function setActiveDay(day) { 
+        stopTimerAndSave();
+        timerRunning = false;
+        if(timerInterval) clearInterval(timerInterval);
+        activeDay = day; 
+        document.querySelectorAll('.tab-day').forEach(tab => { if(parseInt(tab.dataset.day)===activeDay) tab.classList.add('active'); else tab.classList.remove('active'); }); 
+        renderCurrentDay(); 
+        updateProgress(); 
+    }
+    function navigateWeek(delta) { 
+        salvarHistoricoCargas();
+        stopTimerAndSave(); 
+        timerRunning=false; 
+        if(timerInterval) clearInterval(timerInterval); 
+        const nd = new Date(currentMonday); 
+        nd.setDate(currentMonday.getDate() + delta*7); 
+        currentMonday = nd; 
+        updateProgress(); 
+        setActiveDay(activeDay); 
+    }
+    function goToCurrentWeek() { 
+        salvarHistoricoCargas();
+        stopTimerAndSave(); 
+        timerRunning=false; 
+        if(timerInterval) clearInterval(timerInterval); 
+        currentMonday = getMondayOfCurrentWeek(new Date()); 
+        updateProgress(); 
+        setActiveDay(activeDay); 
+    }
     
-    document.getElementById('saveBtn').addEventListener('click', () => { alert('✅ Todos os dados (cargas, séries concluídas, GIFs) já estão salvos automaticamente.'); });
+    document.getElementById('saveBtn').addEventListener('click', () => { alert('✅ Todos os dados (cargas, tempo, GIFs) já estão salvos automaticamente.'); });
     
-    // Relatório com progressão de carga (apenas cargas, e também exibe % de séries concluídas)
-    function getPreviousWeekMonday(monday) { const prev = new Date(monday); prev.setDate(monday.getDate() - 7); return prev; }
-    function getLoadPrevious(day, idx, mondayRef) { const prevMonday = getPreviousWeekMonday(mondayRef); const key = `load_${day}_${idx}`; return localStorage.getItem(key) ?? workoutsByDay[day].exercises[idx].defaultLoad; }
+    // Relatório (apenas alterações)
     function gerarRelatorio() {
+        salvarHistoricoCargas();
         const monday = currentMonday;
-        let totalTime = 0;
-        let completedCount = 0;
-        for(let i=1;i<=6;i++) { if(isWorkoutDone(getDateOfWeekday(monday, i))) { completedCount++; totalTime += workoutsByDay[i].timeMin; } }
+        let totalTime = 0, completedCount = 0;
+        for(let i=1;i<=6;i++) { const d = getDateOfWeekday(monday, i); if(isWorkoutDone(d)) { completedCount++; totalTime += getWorkoutTime(d); } }
         let html = `<h3><i class="fas fa-chart-line"></i> Relatório Semanal</h3>`;
-        html += `<div class="report-week"><strong>Período:</strong> ${formatBR(getDateOfWeekday(monday,1))} a ${formatBR(getDateOfWeekday(monday,6))}<br><strong>Treinos realizados:</strong> ${completedCount}/6<br><strong>Tempo total estimado:</strong> ${totalTime} minutos</div>`;
+        html += `<div class="report-week"><strong>Período:</strong> ${formatBR(getDateOfWeekday(monday,1))} a ${formatBR(getDateOfWeekday(monday,6))}<br><strong>Treinos realizados:</strong> ${completedCount}/6<br><strong>Tempo total:</strong> ${Math.floor(totalTime/60)}min ${totalTime%60}s</div>`;
         html += `<div><strong>📊 Progressão de Carga (semana atual vs anterior)</strong></div>`;
-        for(let day=1; day<=6; day++) {
-            const workout = workoutsByDay[day];
-            if(!workout) continue;
-            html += `<div style="margin-top:15px;"><i class="fas fa-calendar-day"></i> <strong>Dia ${day} (${workout.name.split('·')[0]})</strong></div>`;
-            workout.exercises.forEach((ex, idx) => {
-                const cargaAtual = getLoad(day, idx);
-                const cargaAnterior = getLoadPrevious(day, idx, monday);
-                let diff = "", badge = "";
-                if(cargaAtual !== "--" && cargaAnterior !== "--") {
-                    const numAtual = parseFloat(cargaAtual);
-                    const numAnt = parseFloat(cargaAnterior);
-                    if(!isNaN(numAtual) && !isNaN(numAnt)) {
-                        if(numAtual > numAnt) { diff = ` (+${(numAtual-numAnt).toFixed(1)} kg)`; badge = `<span class="progress-badge">↑ Evolução</span>`; }
-                        else if(numAtual < numAnt) { diff = ` (${(numAtual-numAnt).toFixed(1)} kg ↓)`; badge = `<span class="progress-badge regress-badge">↓ Regressão</span>`; }
-                        else { diff = ` (estável)`; badge = `<span class="progress-badge neutral-badge">➖ Estável</span>`; }
-                    } else { diff = ""; badge = `<span class="progress-badge neutral-badge">⚪ Não numérico</span>`; }
-                } else { diff = ""; badge = `<span class="progress-badge neutral-badge">⚪ Carga especial</span>`; }
-                html += `<div class="progress-item"><strong>${ex.name}</strong><br>Carga atual: ${cargaAtual} kg | Anterior: ${cargaAnterior} kg ${diff} ${badge}</div>`;
-            });
+        const historicoAnt = carregarHistoricoSemanaAnterior();
+        if (!historicoAnt) {
+            html += `<div class="progress-item" style="color:#FFA500;">Nenhum dado da semana anterior.</div>`;
+        } else {
+            let anyChange = false;
+            for(let day=1; day<=6; day++) {
+                const workout = workoutsByDay[day];
+                let dayChanges = [];
+                workout.exercises.forEach((ex, idx) => {
+                    const atual = getLoad(day, idx);
+                    const ant = historicoAnt[day]?.[idx] ?? workoutsByDay[day].exercises[idx].defaultLoad;
+                    if(atual !== "--" && ant !== "--") {
+                        const numAtual = parseFloat(atual), numAnt = parseFloat(ant);
+                        if(!isNaN(numAtual) && !isNaN(numAnt) && numAtual !== numAnt) {
+                            anyChange = true;
+                            const diff = numAtual - numAnt;
+                            const badge = diff > 0 ? `<span class="progress-badge">↑ +${diff.toFixed(1)} kg</span>` : `<span class="progress-badge regress-badge">↓ ${diff.toFixed(1)} kg</span>`;
+                            dayChanges.push(`<div class="progress-item"><strong>${ex.name}</strong><br>${ant} kg → ${atual} kg ${badge}</div>`);
+                        }
+                    }
+                });
+                if(dayChanges.length) {
+                    html += `<div style="margin-top:15px;"><i class="fas fa-calendar-day"></i> <strong>Dia ${day} (${workout.name.split('·')[0]})</strong></div>${dayChanges.join('')}`;
+                }
+            }
+            if(!anyChange) html += `<div class="progress-item">Nenhuma alteração de carga nesta semana.</div>`;
         }
-        html += `<button id="closeReportBtnFinal" class="close-report"><i class="fas fa-times-circle"></i> Fechar</button>`;
+        html += `<button id="closeReportBtnFinal" class="close-report">Fechar</button>`;
         document.getElementById('reportContent').innerHTML = html;
         document.getElementById('reportModal').style.display = 'flex';
-        document.getElementById('closeReportBtnFinal').addEventListener('click', () => { document.getElementById('reportModal').style.display = 'none'; });
+        document.getElementById('closeReportBtnFinal').addEventListener('click', () => document.getElementById('reportModal').style.display = 'none');
     }
     document.getElementById('reportBtn').addEventListener('click', gerarRelatorio);
     window.onclick = (e) => { if(e.target === document.getElementById('reportModal')) document.getElementById('reportModal').style.display = 'none'; };

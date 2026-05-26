@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>IWFA Fitness | PPL Otimizado 42 anos</title>
+    <title>IWFA Fitness | PPL Otimizado IwFa Fitness </title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -20,7 +20,7 @@
             padding: 16px 12px 40px;
         }
         .container {
-            max-width: 700px;
+            max-width: 650px;
             margin: 0 auto;
         }
         .plan-header {
@@ -28,7 +28,7 @@
             text-align: center;
         }
         .plan-header h1 {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 800;
             background: linear-gradient(135deg, #FFA000, #FFD966);
             -webkit-background-clip: text;
@@ -37,16 +37,15 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
         }
-        /* Abas */
         .days-tabs {
             display: flex;
             flex-wrap: wrap;
-            gap: 6px;
-            margin: 16px 0 20px;
+            gap: 4px;
+            margin: 14px 0 16px;
             background: #11161f;
-            padding: 6px;
+            padding: 5px;
             border-radius: 50px;
             justify-content: space-between;
         }
@@ -55,10 +54,10 @@
             text-align: center;
             background: transparent;
             border: none;
-            padding: 10px 0;
+            padding: 8px 0;
             border-radius: 40px;
             font-weight: 700;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             color: #9aaec0;
             cursor: pointer;
             transition: all 0.2s;
@@ -66,21 +65,20 @@
         .tab-day.active {
             background: #FF8C00;
             color: #0a0c10;
-            box-shadow: 0 4px 10px rgba(255,140,0,0.3);
+            box-shadow: 0 2px 6px rgba(255,140,0,0.3);
         }
-        /* Card treino */
         .workout-card {
             background: #121722;
-            border-radius: 28px;
+            border-radius: 24px;
             border: 1px solid #29313e;
             overflow: hidden;
             margin-bottom: 20px;
         }
         .top-actions {
             background: #1a212e;
-            padding: 12px 16px;
+            padding: 10px 12px;
             display: flex;
-            gap: 10px;
+            gap: 8px;
             justify-content: space-between;
             border-bottom: 1px solid #29313e;
             flex-wrap: wrap;
@@ -89,18 +87,18 @@
             flex: 1;
             background: #2a3a4a;
             border: none;
-            padding: 10px 12px;
+            padding: 8px 10px;
             border-radius: 50px;
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: white;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 5px;
             transition: 0.2s;
-            min-width: 100px;
+            min-width: 85px;
         }
         .btn-iniciar {
             background: linear-gradient(135deg, #FF8C00, #FFA500);
@@ -111,120 +109,123 @@
         }
         .timer-display {
             background: #0f141c;
-            padding: 6px 12px;
+            padding: 5px 10px;
             border-radius: 40px;
             font-family: monospace;
-            font-size: 1rem;
+            font-size: 0.85rem;
             font-weight: 700;
             color: #FFD966;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
             white-space: nowrap;
         }
         .workout-settings {
             background: #1a212e;
-            padding: 10px 16px;
+            padding: 8px 12px;
             border-bottom: 1px solid #29313e;
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 6px;
         }
         .setting-item {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
             background: #0f141c;
-            padding: 4px 12px;
+            padding: 3px 10px;
             border-radius: 40px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 500;
         }
         .setting-item i { color: #FFA500; }
         .muscles-area {
             background: #0f141c;
-            padding: 10px 16px;
+            padding: 8px 12px;
             border-bottom: 1px solid #29313e;
             text-align: center;
         }
         .muscles-title {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
             color: #aaa;
             letter-spacing: 1px;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
         .muscle-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 6px;
             justify-content: center;
         }
         .muscle-tag {
             background: #1f2a36;
-            padding: 4px 12px;
+            padding: 3px 10px;
             border-radius: 30px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 500;
         }
         .exercises-list {
-            padding: 8px 0;
+            padding: 6px 0;
         }
         .exercise-item {
-            padding: 14px 16px;
+            padding: 10px 12px;
             border-bottom: 1px solid #252e3a;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
-        /* Cabeçalho do exercício com GIF à esquerda fixo */
-        .exercise-header {
+        /* GIF à esquerda + conteúdo compacto */
+        .exercise-row {
             display: flex;
             align-items: flex-start;
-            gap: 14px;
+            gap: 10px;
             flex-wrap: nowrap;
         }
         .gif-left {
             flex-shrink: 0;
-            width: 100px;
             background: #080c12;
-            border-radius: 16px;
-            padding: 6px;
+            border-radius: 12px;
+            padding: 4px;
             border: 1px solid #FFA50060;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
+            width: 70px;
         }
         .gif-left img {
-            max-width: 80px;
-            max-height: 70px;
+            max-width: 60px;
+            max-height: 50px;
             object-fit: contain;
-            border-radius: 10px;
+            border-radius: 8px;
         }
         .gif-left-placeholder {
-            width: 80px;
-            height: 65px;
+            width: 60px;
+            height: 45px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             color: #8f9bb3;
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             text-align: center;
         }
         .gif-icon-buttons {
             display: flex;
-            gap: 5px;
+            gap: 3px;
             justify-content: center;
         }
         .gif-icon-btn {
             background: #1f2a36;
             border: none;
-            width: 30px;
-            height: 30px;
+            width: 26px;
+            height: 26px;
             border-radius: 30px;
             cursor: pointer;
             color: white;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -233,34 +234,35 @@
         .gif-icon-btn:active { background: #FF8C00; color: black; }
         .exercise-details {
             flex: 1;
-            min-width: 0; /* permite que o conteúdo encolha sem estourar */
+            min-width: 0; /* permite encolher */
         }
         .exercise-name {
             font-weight: 700;
-            font-size: 0.95rem;
+            font-size: 0.8rem;
             display: flex;
             align-items: center;
-            gap: 6px;
-            margin-bottom: 8px;
+            gap: 5px;
+            margin-bottom: 6px;
+            flex-wrap: wrap;
         }
-        .exercise-name i { color: #FF8C00; }
-        .exercise-row-fields {
+        .exercise-name i { color: #FF8C00; font-size: 0.75rem; }
+        .exercise-fields {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+            gap: 6px;
         }
         .field {
             background: #0b1018;
-            border-radius: 28px;
-            padding: 4px 8px;
+            border-radius: 20px;
+            padding: 3px 5px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 4px;
+            gap: 3px;
             border: 1px solid #2a3542;
         }
         .field label {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             color: #aaa;
             font-weight: 500;
         }
@@ -269,18 +271,17 @@
             border: none;
             color: #FFD966;
             font-weight: 600;
-            width: 55px;
-            font-size: 0.85rem;
+            width: 48px;
+            font-size: 0.75rem;
             text-align: center;
             font-family: monospace;
         }
         .field input:focus { outline: none; }
         
-        /* Rodapé progresso */
         .progress-footer {
             background: #0e121b;
-            border-radius: 28px;
-            padding: 10px 16px;
+            border-radius: 24px;
+            padding: 8px 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -288,10 +289,10 @@
         }
         .progress-bar-bg {
             flex: 2;
-            height: 8px;
+            height: 6px;
             background: #262e3a;
             border-radius: 10px;
-            margin: 0 10px;
+            margin: 0 8px;
             overflow: hidden;
         }
         .progress-fill {
@@ -301,40 +302,40 @@
         }
         .week-controls {
             display: flex;
-            gap: 10px;
-            margin-top: 12px;
+            gap: 8px;
+            margin-top: 10px;
             justify-content: center;
             flex-wrap: wrap;
         }
         .week-btn {
             background: #1f2937;
             border: none;
-            padding: 8px 16px;
+            padding: 6px 14px;
             border-radius: 40px;
             color: white;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             cursor: pointer;
         }
         .bottom-actions {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             justify-content: center;
-            margin-top: 25px;
+            margin-top: 20px;
             margin-bottom: 20px;
             flex-wrap: wrap;
         }
         .action-btn {
             background: linear-gradient(135deg, #2a3a4a, #1f2a36);
             border: none;
-            padding: 10px 20px;
+            padding: 8px 18px;
             border-radius: 60px;
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: white;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             transition: 0.2s;
         }
         .action-btn.reset-btn {
@@ -343,7 +344,6 @@
         .action-btn i { color: #FFA500; }
         .action-btn:active { transform: scale(0.97); }
         
-        /* Modais */
         .modal, .modal-report {
             display: none;
             position: fixed;
@@ -356,13 +356,13 @@
             justify-content: center;
             z-index: 1000;
             overflow-y: auto;
-            padding: 20px;
+            padding: 16px;
         }
         .modal-content, .report-content {
             background: #1a212e;
-            border-radius: 28px;
-            padding: 20px;
-            max-width: 550px;
+            border-radius: 24px;
+            padding: 18px;
+            max-width: 500px;
             width: 100%;
             max-height: 85vh;
             overflow-y: auto;
@@ -370,8 +370,8 @@
             border: 1px solid #FF8C00;
         }
         .report-content h3 {
-            font-size: 1.4rem;
-            margin-bottom: 16px;
+            font-size: 1.3rem;
+            margin-bottom: 14px;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -379,37 +379,39 @@
         }
         .report-week {
             background: #0f141c;
-            padding: 12px;
-            border-radius: 20px;
-            margin-bottom: 16px;
+            padding: 10px;
+            border-radius: 18px;
+            margin-bottom: 14px;
+            font-size: 0.8rem;
         }
         .progress-item {
             border-bottom: 1px solid #2a3542;
-            padding: 8px 0;
+            padding: 6px 0;
+            font-size: 0.8rem;
         }
         .progress-badge {
             display: inline-block;
-            margin-left: 8px;
-            font-size: 0.7rem;
+            margin-left: 6px;
+            font-size: 0.65rem;
             background: #2a7a3e;
-            padding: 2px 8px;
+            padding: 2px 6px;
             border-radius: 20px;
         }
         .regress-badge { background: #8b3a3a; }
         .close-report {
             background: #FF8C00;
             border: none;
-            padding: 10px 20px;
+            padding: 8px 16px;
             border-radius: 40px;
             font-weight: bold;
-            margin-top: 20px;
+            margin-top: 16px;
             cursor: pointer;
             width: 100%;
         }
         .modal-content input {
             width: 100%;
-            padding: 12px;
-            margin: 16px 0;
+            padding: 10px;
+            margin: 12px 0;
             border-radius: 60px;
             border: none;
             background: #0f141c;
@@ -417,11 +419,11 @@
         }
         .modal-buttons {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             justify-content: center;
         }
         .modal-btn {
-            padding: 8px 18px;
+            padding: 6px 16px;
             border-radius: 40px;
             border: none;
             font-weight: 600;
@@ -440,9 +442,9 @@
             transform: translateX(-50%);
             background: #000000cc;
             color: white;
-            padding: 4px 8px;
-            border-radius: 8px;
-            font-size: 0.6rem;
+            padding: 3px 6px;
+            border-radius: 6px;
+            font-size: 0.55rem;
             white-space: nowrap;
             display: none;
             z-index: 10;
@@ -450,35 +452,22 @@
         [data-tooltip]:hover:before {
             display: block;
         }
-        @media (max-width: 550px) {
-            .exercise-header {
-                flex-direction: column;
-                align-items: center;
-            }
-            .gif-left {
-                margin-bottom: 8px;
-                align-self: center;
-            }
-            .exercise-details {
-                width: 100%;
-            }
-            .exercise-row-fields {
-                grid-template-columns: 1fr;
-                gap: 8px;
-            }
-            .field {
-                justify-content: space-between;
-            }
+        @media (max-width: 500px) {
             .top-actions { flex-direction: column; }
             .btn-treino { width: 100%; }
             .timer-display { justify-content: center; width: 100%; }
+            .exercise-row { flex-direction: column; align-items: center; }
+            .gif-left { width: 90px; }
+            .gif-left img { max-width: 80px; }
+            .exercise-details { width: 100%; }
+            .exercise-fields { grid-template-columns: 1fr; gap: 5px; }
         }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="plan-header">
-        <h1><i class="fas fa-dumbbell"></i> Meu Plano PPL · 42 anos</h1>
+        <h1><i class="fas fa-dumbbell"></i> Meu Plano PPL · IwFa Fitness </h1>
     </div>
     <div class="days-tabs" id="daysTabs">
         <button class="tab-day" data-day="1">DIA 1 (A)</button>
@@ -495,9 +484,9 @@
         <span id="completedCount">0</span>/<span id="totalDays">6</span>
     </div>
     <div class="week-controls">
-        <button id="prevWeekBtn" class="week-btn"><i class="fas fa-chevron-left"></i> Semana anterior</button>
+        <button id="prevWeekBtn" class="week-btn"><i class="fas fa-chevron-left"></i> Anterior</button>
         <button id="todayWeekBtn" class="week-btn"><i class="fas fa-calendar-day"></i> Hoje</button>
-        <button id="nextWeekBtn" class="week-btn">Próxima semana <i class="fas fa-chevron-right"></i></button>
+        <button id="nextWeekBtn" class="week-btn">Próxima <i class="fas fa-chevron-right"></i></button>
     </div>
     <div class="bottom-actions">
         <button id="saveBtn" class="action-btn"><i class="fas fa-save"></i> Salvar</button>
@@ -524,7 +513,7 @@
 </div>
 
 <script>
-    // Base de treinos (conteúdo completo)
+    // ==================== BASE DE TREINOS (MESMA ESTRUTURA) ====================
     const workoutsByDay = {
         1: { name: "PUSH · Peito / Ombro / Tríceps", muscles: ["Peito","Ombros","Tríceps"], timeMin: 70,
             exercises: [
@@ -582,7 +571,7 @@
             ] }
     };
 
-    // Storage helpers
+    // ==================== STORAGE HELPERS ====================
     function getWorkoutKey(dateObj) { return `workout_${formatYMD(dateObj)}`; }
     function isWorkoutDone(dateObj) { return localStorage.getItem(getWorkoutKey(dateObj)) === 'true'; }
     function setWorkoutDone(dateObj, done) { done ? localStorage.setItem(getWorkoutKey(dateObj),'true') : localStorage.removeItem(getWorkoutKey(dateObj)); renderCurrentDay(); updateProgress(); }
@@ -597,7 +586,7 @@
     function getGif(day, idx) { return localStorage.getItem(`gif_${day}_${idx}`); }
     function setGif(day, idx, url) { if(url) localStorage.setItem(`gif_${day}_${idx}`, url); else localStorage.removeItem(`gif_${day}_${idx}`); renderCurrentDay(); }
 
-    // Histórico de cargas
+    // Histórico de cargas para progressão
     function salvarHistoricoCargas() {
         const dataSegunda = formatYMD(currentMonday);
         const historico = {};
@@ -685,7 +674,7 @@
             <div class="workout-settings">
                 <div class="setting-item"><i class="fas fa-hourglass-half"></i> ${workout.timeMin}min</div>
                 <div class="setting-item"><i class="fas fa-muscle"></i> ${workout.muscles.length} Músculos</div>
-                <div class="setting-item"><i class="fas fa-university"></i> Academia Graduada</div>
+                <div class="setting-item"><i class="fas fa-university"></i> Academia</div>
             </div>
             <div class="muscles-area">
                 <div class="muscles-title">MÚSCULOS TRABALHADOS</div>
@@ -704,7 +693,7 @@
             if (gifUrl) {
                 gifLeftHtml = `
                     <div class="gif-left">
-                        <img src="${gifUrl}" alt="GIF exercício" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'gif-left-placeholder\'><i class=\'fas fa-file-image\'></i><span>Erro</span></div>'">
+                        <img src="${gifUrl}" alt="GIF" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'gif-left-placeholder\'><i class=\'fas fa-file-image\'></i><span>Erro</span></div>'">
                         <div class="gif-icon-buttons">
                             <button class="gif-icon-btn upload-gif" data-day="${activeDay}" data-ex="${idx}" data-tooltip="Enviar GIF"><i class="fas fa-upload"></i></button>
                             <button class="gif-icon-btn url-gif" data-day="${activeDay}" data-ex="${idx}" data-tooltip="URL do GIF"><i class="fas fa-link"></i></button>
@@ -726,14 +715,14 @@
             
             exercisesHtml += `
                 <div class="exercise-item">
-                    <div class="exercise-header">
+                    <div class="exercise-row">
                         ${gifLeftHtml}
                         <div class="exercise-details">
                             <div class="exercise-name"><i class="fas fa-dumbbell"></i> ${ex.name}</div>
-                            <div class="exercise-row-fields">
+                            <div class="exercise-fields">
                                 <div class="field"><label>SÉRIES</label><input type="number" class="series-input" data-day="${activeDay}" data-ex="${idx}" value="${currentSeries}" step="1" min="0"></div>
                                 <div class="field"><label>REPS</label><input type="text" class="reps-input" data-day="${activeDay}" data-ex="${idx}" value="${currentReps}"></div>
-                                <div class="field"><label>CARGA (kg)</label><input type="text" class="load-input" data-day="${activeDay}" data-ex="${idx}" value="${currentLoad}"></div>
+                                <div class="field"><label>CARGA</label><input type="text" class="load-input" data-day="${activeDay}" data-ex="${idx}" value="${currentLoad}"></div>
                             </div>
                         </div>
                     </div>
@@ -850,9 +839,9 @@
         setActiveDay(activeDay); 
     }
     
-    document.getElementById('saveBtn').addEventListener('click', () => { alert('✅ Todos os dados (cargas, tempo, GIFs) já estão salvos automaticamente.'); });
+    document.getElementById('saveBtn').addEventListener('click', () => { alert('✅ Todos os dados já estão salvos automaticamente.'); });
     document.getElementById('resetDataBtn').addEventListener('click', () => {
-        if(confirm('⚠️ ATENÇÃO: Isso irá apagar TODO o seu progresso (treinos concluídos, cargas editadas, GIFs, tempos e histórico). Esta ação não pode ser desfeita. Deseja continuar?')) {
+        if(confirm('⚠️ ATENÇÃO: Isso apagará TODO o progresso. Deseja continuar?')) {
             localStorage.clear();
             location.reload();
         }
@@ -868,7 +857,7 @@
         html += `<div><strong>📊 Progressão de Carga (semana atual vs anterior)</strong></div>`;
         const historicoAnt = carregarHistoricoSemanaAnterior();
         if (!historicoAnt) {
-            html += `<div class="progress-item" style="color:#FFA500;">Nenhum dado da semana anterior. Complete uma semana e gere novamente.</div>`;
+            html += `<div class="progress-item" style="color:#FFA500;">Nenhum dado da semana anterior.</div>`;
         } else {
             let anyChange = false;
             for(let day=1; day<=6; day++) {
@@ -888,10 +877,10 @@
                     }
                 });
                 if(dayChanges.length) {
-                    html += `<div style="margin-top:15px;"><i class="fas fa-calendar-day"></i> <strong>Dia ${day} (${workout.name.split('·')[0]})</strong></div>${dayChanges.join('')}`;
+                    html += `<div style="margin-top:12px;"><i class="fas fa-calendar-day"></i> <strong>Dia ${day} (${workout.name.split('·')[0]})</strong></div>${dayChanges.join('')}`;
                 }
             }
-            if(!anyChange) html += `<div class="progress-item">Nenhuma alteração de carga detectada nesta semana.</div>`;
+            if(!anyChange) html += `<div class="progress-item">Nenhuma alteração de carga detectada.</div>`;
         }
         html += `<button id="closeReportBtnFinal" class="close-report">Fechar</button>`;
         document.getElementById('reportContent').innerHTML = html;

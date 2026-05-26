@@ -20,7 +20,7 @@
             padding: 16px 12px 40px;
         }
         .container {
-            max-width: 650px;
+            max-width: 700px;
             margin: 0 auto;
         }
         .plan-header {
@@ -174,38 +174,35 @@
         .exercise-item {
             padding: 14px 16px;
             border-bottom: 1px solid #252e3a;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
         }
-        /* Cabeçalho do exercício com GIF à esquerda */
+        /* Cabeçalho do exercício com GIF à esquerda fixo */
         .exercise-header {
             display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 14px;
+            flex-wrap: nowrap;
         }
         .gif-left {
             flex-shrink: 0;
+            width: 100px;
             background: #080c12;
             border-radius: 16px;
-            padding: 4px;
+            padding: 6px;
             border: 1px solid #FFA50060;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
-            width: 85px;
+            gap: 6px;
         }
         .gif-left img {
-            max-width: 70px;
-            max-height: 60px;
+            max-width: 80px;
+            max-height: 70px;
             object-fit: contain;
             border-radius: 10px;
         }
         .gif-left-placeholder {
-            width: 70px;
-            height: 55px;
+            width: 80px;
+            height: 65px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -216,7 +213,7 @@
         }
         .gif-icon-buttons {
             display: flex;
-            gap: 4px;
+            gap: 5px;
             justify-content: center;
         }
         .gif-icon-btn {
@@ -236,7 +233,7 @@
         .gif-icon-btn:active { background: #FF8C00; color: black; }
         .exercise-details {
             flex: 1;
-            min-width: 150px;
+            min-width: 0; /* permite que o conteúdo encolha sem estourar */
         }
         .exercise-name {
             font-weight: 700;
@@ -250,7 +247,7 @@
         .exercise-row-fields {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
+            gap: 10px;
         }
         .field {
             background: #0b1018;
@@ -453,16 +450,28 @@
         [data-tooltip]:hover:before {
             display: block;
         }
-        @media (max-width: 500px) {
+        @media (max-width: 550px) {
+            .exercise-header {
+                flex-direction: column;
+                align-items: center;
+            }
+            .gif-left {
+                margin-bottom: 8px;
+                align-self: center;
+            }
+            .exercise-details {
+                width: 100%;
+            }
+            .exercise-row-fields {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            .field {
+                justify-content: space-between;
+            }
             .top-actions { flex-direction: column; }
             .btn-treino { width: 100%; }
             .timer-display { justify-content: center; width: 100%; }
-            .exercise-header { flex-direction: column; align-items: flex-start; }
-            .gif-left { align-self: center; }
-            .exercise-row-fields { grid-template-columns: 1fr; gap: 6px; }
-            .field { justify-content: space-between; }
-            .days-tabs { gap: 4px; }
-            .tab-day { font-size: 0.7rem; padding: 6px 0; }
         }
     </style>
 </head>
@@ -515,7 +524,7 @@
 </div>
 
 <script>
-    // Treinos (mesmo conteúdo anterior)
+    // Base de treinos (conteúdo completo)
     const workoutsByDay = {
         1: { name: "PUSH · Peito / Ombro / Tríceps", muscles: ["Peito","Ombros","Tríceps"], timeMin: 70,
             exercises: [
@@ -695,7 +704,7 @@
             if (gifUrl) {
                 gifLeftHtml = `
                     <div class="gif-left">
-                        <img src="${gifUrl}" alt="GIF" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'gif-left-placeholder\'><i class=\'fas fa-file-image\'></i><span>Erro</span></div>'">
+                        <img src="${gifUrl}" alt="GIF exercício" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'gif-left-placeholder\'><i class=\'fas fa-file-image\'></i><span>Erro</span></div>'">
                         <div class="gif-icon-buttons">
                             <button class="gif-icon-btn upload-gif" data-day="${activeDay}" data-ex="${idx}" data-tooltip="Enviar GIF"><i class="fas fa-upload"></i></button>
                             <button class="gif-icon-btn url-gif" data-day="${activeDay}" data-ex="${idx}" data-tooltip="URL do GIF"><i class="fas fa-link"></i></button>
@@ -841,19 +850,14 @@
         setActiveDay(activeDay); 
     }
     
-    // Salvar (apenas alerta pois já salva automático)
     document.getElementById('saveBtn').addEventListener('click', () => { alert('✅ Todos os dados (cargas, tempo, GIFs) já estão salvos automaticamente.'); });
-    
-    // Resetar TODOS os dados do usuário
     document.getElementById('resetDataBtn').addEventListener('click', () => {
         if(confirm('⚠️ ATENÇÃO: Isso irá apagar TODO o seu progresso (treinos concluídos, cargas editadas, GIFs, tempos e histórico). Esta ação não pode ser desfeita. Deseja continuar?')) {
             localStorage.clear();
-            // Recarregar a página para reiniciar tudo
             location.reload();
         }
     });
     
-    // Relatório com apenas alterações
     function gerarRelatorio() {
         salvarHistoricoCargas();
         const monday = currentMonday;

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>IWFA Fitness | PPL Otimizado IwFa Fitness </title>
+    <title>IWFA Fitness | PPL Otimizado 42 anos</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -172,17 +172,16 @@
         .exercise-item {
             padding: 10px 12px;
             border-bottom: 1px solid #252e3a;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
         }
-        /* GIF à esquerda + conteúdo compacto */
+        /* Estrutura principal: GIF esquerda, nome centralizado, campos direita */
         .exercise-row {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
+            justify-content: space-between;
             gap: 10px;
             flex-wrap: nowrap;
         }
+        /* Coluna 1: GIF */
         .gif-left {
             flex-shrink: 0;
             background: #080c12;
@@ -232,51 +231,57 @@
             transition: 0.2s;
         }
         .gif-icon-btn:active { background: #FF8C00; color: black; }
-        .exercise-details {
+        /* Coluna 2: Nome do exercício centralizado */
+        .exercise-name-center {
             flex: 1;
-            min-width: 0; /* permite encolher */
-        }
-        .exercise-name {
+            text-align: center;
             font-weight: 700;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 5px;
-            margin-bottom: 6px;
             flex-wrap: wrap;
+            padding: 0 4px;
         }
-        .exercise-name i { color: #FF8C00; font-size: 0.75rem; }
-        .exercise-fields {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+        .exercise-name-center i {
+            color: #FF8C00;
+            font-size: 0.8rem;
+        }
+        /* Coluna 3: Campos reduzidos alinhados à direita */
+        .fields-right {
+            flex-shrink: 0;
+            display: flex;
             gap: 6px;
+            align-items: center;
+            justify-content: flex-end;
         }
-        .field {
+        .small-field {
             background: #0b1018;
             border-radius: 20px;
-            padding: 3px 5px;
+            padding: 2px 5px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
             gap: 3px;
             border: 1px solid #2a3542;
         }
-        .field label {
-            font-size: 0.6rem;
+        .small-field label {
+            font-size: 0.55rem;
             color: #aaa;
             font-weight: 500;
         }
-        .field input {
+        .small-field input {
             background: transparent;
             border: none;
             color: #FFD966;
             font-weight: 600;
-            width: 48px;
-            font-size: 0.75rem;
-            text-align: center;
+            width: 40px;
+            font-size: 0.7rem;
+            text-align: right;
             font-family: monospace;
+            padding: 2px 0;
         }
-        .field input:focus { outline: none; }
+        .small-field input:focus { outline: none; }
         
         .progress-footer {
             background: #0e121b;
@@ -452,22 +457,25 @@
         [data-tooltip]:hover:before {
             display: block;
         }
+        /* Responsivo: se não couber, empilha */
         @media (max-width: 500px) {
             .top-actions { flex-direction: column; }
             .btn-treino { width: 100%; }
             .timer-display { justify-content: center; width: 100%; }
-            .exercise-row { flex-direction: column; align-items: center; }
-            .gif-left { width: 90px; }
-            .gif-left img { max-width: 80px; }
-            .exercise-details { width: 100%; }
-            .exercise-fields { grid-template-columns: 1fr; gap: 5px; }
+            .exercise-row {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .gif-left { margin-bottom: 5px; }
+            .exercise-name-center { order: 2; width: 100%; margin-top: 5px; }
+            .fields-right { order: 3; width: 100%; justify-content: center; margin-top: 5px; }
         }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="plan-header">
-        <h1><i class="fas fa-dumbbell"></i> Meu Plano PPL · IwFa Fitness </h1>
+        <h1><i class="fas fa-dumbbell"></i> Meu Plano PPL · 42 anos</h1>
     </div>
     <div class="days-tabs" id="daysTabs">
         <button class="tab-day" data-day="1">DIA 1 (A)</button>
@@ -696,8 +704,8 @@
                         <img src="${gifUrl}" alt="GIF" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'gif-left-placeholder\'><i class=\'fas fa-file-image\'></i><span>Erro</span></div>'">
                         <div class="gif-icon-buttons">
                             <button class="gif-icon-btn upload-gif" data-day="${activeDay}" data-ex="${idx}" data-tooltip="Enviar GIF"><i class="fas fa-upload"></i></button>
-                            <button class="gif-icon-btn url-gif" data-day="${activeDay}" data-ex="${idx}" data-tooltip="URL do GIF"><i class="fas fa-link"></i></button>
-                            <button class="gif-icon-btn remove-gif" data-day="${activeDay}" data-ex="${idx}" data-tooltip="Remover GIF"><i class="fas fa-trash-alt"></i></button>
+                            <button class="gif-icon-btn url-gif" data-day="${activeDay}" data-ex="${idx}" data-tooltip="URL GIF"><i class="fas fa-link"></i></button>
+                            <button class="gif-icon-btn remove-gif" data-day="${activeDay}" data-ex="${idx}" data-tooltip="Remover"><i class="fas fa-trash-alt"></i></button>
                         </div>
                     </div>
                 `;
@@ -707,7 +715,7 @@
                         <div class="gif-left-placeholder"><i class="fas fa-play-circle fa-2x"></i><span>GIF</span></div>
                         <div class="gif-icon-buttons">
                             <button class="gif-icon-btn upload-gif" data-day="${activeDay}" data-ex="${idx}" data-tooltip="Enviar GIF"><i class="fas fa-upload"></i></button>
-                            <button class="gif-icon-btn url-gif" data-day="${activeDay}" data-ex="${idx}" data-tooltip="URL do GIF"><i class="fas fa-link"></i></button>
+                            <button class="gif-icon-btn url-gif" data-day="${activeDay}" data-ex="${idx}" data-tooltip="URL GIF"><i class="fas fa-link"></i></button>
                         </div>
                     </div>
                 `;
@@ -717,13 +725,13 @@
                 <div class="exercise-item">
                     <div class="exercise-row">
                         ${gifLeftHtml}
-                        <div class="exercise-details">
-                            <div class="exercise-name"><i class="fas fa-dumbbell"></i> ${ex.name}</div>
-                            <div class="exercise-fields">
-                                <div class="field"><label>SÉRIES</label><input type="number" class="series-input" data-day="${activeDay}" data-ex="${idx}" value="${currentSeries}" step="1" min="0"></div>
-                                <div class="field"><label>REPS</label><input type="text" class="reps-input" data-day="${activeDay}" data-ex="${idx}" value="${currentReps}"></div>
-                                <div class="field"><label>CARGA</label><input type="text" class="load-input" data-day="${activeDay}" data-ex="${idx}" value="${currentLoad}"></div>
-                            </div>
+                        <div class="exercise-name-center">
+                            <i class="fas fa-dumbbell"></i> ${ex.name}
+                        </div>
+                        <div class="fields-right">
+                            <div class="small-field"><label>SÉR</label><input type="number" class="series-input" data-day="${activeDay}" data-ex="${idx}" value="${currentSeries}" step="1" min="0" placeholder="S"></div>
+                            <div class="small-field"><label>REP</label><input type="text" class="reps-input" data-day="${activeDay}" data-ex="${idx}" value="${currentReps}"></div>
+                            <div class="small-field"><label>KG</label><input type="text" class="load-input" data-day="${activeDay}" data-ex="${idx}" value="${currentLoad}"></div>
                         </div>
                     </div>
                 </div>
@@ -841,7 +849,7 @@
     
     document.getElementById('saveBtn').addEventListener('click', () => { alert('✅ Todos os dados já estão salvos automaticamente.'); });
     document.getElementById('resetDataBtn').addEventListener('click', () => {
-        if(confirm('⚠️ ATENÇÃO: Isso apagará TODO o progresso. Deseja continuar?')) {
+        if(confirm('⚠️ ATENÇÃO: Isso apagará TODO o progresso (cargas, GIFs, treinos concluídos). Deseja continuar?')) {
             localStorage.clear();
             location.reload();
         }
@@ -857,7 +865,7 @@
         html += `<div><strong>📊 Progressão de Carga (semana atual vs anterior)</strong></div>`;
         const historicoAnt = carregarHistoricoSemanaAnterior();
         if (!historicoAnt) {
-            html += `<div class="progress-item" style="color:#FFA500;">Nenhum dado da semana anterior.</div>`;
+            html += `<div class="progress-item" style="color:#FFA500;">Nenhum dado da semana anterior. Complete uma semana e gere novamente.</div>`;
         } else {
             let anyChange = false;
             for(let day=1; day<=6; day++) {
@@ -880,7 +888,7 @@
                     html += `<div style="margin-top:12px;"><i class="fas fa-calendar-day"></i> <strong>Dia ${day} (${workout.name.split('·')[0]})</strong></div>${dayChanges.join('')}`;
                 }
             }
-            if(!anyChange) html += `<div class="progress-item">Nenhuma alteração de carga detectada.</div>`;
+            if(!anyChange) html += `<div class="progress-item">Nenhuma alteração de carga detectada nesta semana.</div>`;
         }
         html += `<button id="closeReportBtnFinal" class="close-report">Fechar</button>`;
         document.getElementById('reportContent').innerHTML = html;

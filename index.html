@@ -470,15 +470,15 @@
 <body>
 <div class="container">
     <div class="plan-header">
-        <h1><i class="fas fa-dumbbell"></i> Meu Plano PPL · </h1>
+        <h1><i class="fas fa-dumbbell"></i> Meu Plano · Alisson Velame</h1>
     </div>
     <div class="days-tabs" id="daysTabs">
-        <button class="tab-day" data-day="1">DIA 1 (A)</button>
-        <button class="tab-day" data-day="2">DIA 2 (B)</button>
-        <button class="tab-day" data-day="3">DIA 3 (C)</button>
-        <button class="tab-day" data-day="4">DIA 4 (A)</button>
-        <button class="tab-day" data-day="5">DIA 5 (B)</button>
-        <button class="tab-day" data-day="6">DIA 6 (C)</button>
+        <button class="tab-day" data-day="1">SEGUNDA (A)</button>
+        <button class="tab-day" data-day="2">TERÇA (B)</button>
+        <button class="tab-day" data-day="3">QUARTA (C)</button>
+        <button class="tab-day" data-day="4">QUINTA (A)</button>
+        <button class="tab-day" data-day="5">SEXTA (B)</button>
+        <button class="tab-day" data-day="6">SÁBADO (C)</button>
     </div>
     <div id="dayContent"></div>
     <div class="progress-footer">
@@ -588,14 +588,12 @@
     function setGif(day, idx, url) { if(url) localStorage.setItem(`gif_${day}_${idx}`, url); else localStorage.removeItem(`gif_${day}_${idx}`); renderCurrentDay(); }
 
     // ==================== FUNÇÃO PARA PROPAGAR GIF PARA MESMOS EXERCÍCIOS ====================
-    // Retorna uma lista de objetos { day, idx } onde o exercício tem o mesmo nome
     function findSameExercises(exerciseName, currentDay, currentIdx) {
         const matches = [];
         for (let day = 1; day <= 6; day++) {
             const workout = workoutsByDay[day];
             if (!workout) continue;
             workout.exercises.forEach((ex, idx) => {
-                // Comparação exata do nome (case-sensitive, mas como está igual em todos os dias)
                 if (ex.name === exerciseName && !(day === currentDay && idx === currentIdx)) {
                     matches.push({ day, idx });
                 }
@@ -604,17 +602,13 @@
         return matches;
     }
 
-    // Propagação: salva o GIF em todos os exercícios com o mesmo nome (inclusive o atual)
-    // Usar uma flag para evitar loops, mas como não chamamos recursivamente dentro da propagação, é seguro.
     function setGifForAllMatches(exerciseName, currentDay, currentIdx, gifUrl) {
         const matches = findSameExercises(exerciseName, currentDay, currentIdx);
-        // Salva no atual primeiro
         if (gifUrl) {
             localStorage.setItem(`gif_${currentDay}_${currentIdx}`, gifUrl);
         } else {
             localStorage.removeItem(`gif_${currentDay}_${currentIdx}`);
         }
-        // Salva em todos os outros
         matches.forEach(({ day, idx }) => {
             if (gifUrl) {
                 localStorage.setItem(`gif_${day}_${idx}`, gifUrl);
@@ -622,7 +616,6 @@
                 localStorage.removeItem(`gif_${day}_${idx}`);
             }
         });
-        // Re-renderiza o dia atual (já que as mudanças podem afetar outros dias, mas só precisamos atualizar o atual)
         renderCurrentDay();
     }
 
@@ -790,7 +783,6 @@
         document.querySelectorAll('.series-input').forEach(inp => inp.addEventListener('change', (e) => { setSeries(parseInt(inp.dataset.day), parseInt(inp.dataset.ex), inp.value); }));
         document.querySelectorAll('.reps-input').forEach(inp => inp.addEventListener('change', (e) => { setReps(parseInt(inp.dataset.day), parseInt(inp.dataset.ex), inp.value); }));
         
-        // Upload de GIF com propagação
         document.querySelectorAll('.upload-gif').forEach(btn => btn.addEventListener('click', (e) => {
             const day = parseInt(btn.dataset.day);
             const ex = parseInt(btn.dataset.ex);
@@ -812,7 +804,6 @@
             input.click();
         }));
         
-        // URL GIF com propagação
         document.querySelectorAll('.url-gif').forEach(btn => btn.addEventListener('click', (e) => {
             const day = parseInt(btn.dataset.day);
             const ex = parseInt(btn.dataset.ex);
@@ -820,7 +811,6 @@
             showUrlModalWithPropagation(day, ex, exName);
         }));
         
-        // Remover GIF com propagação
         document.querySelectorAll('.remove-gif').forEach(btn => btn.addEventListener('click', (e) => {
             const day = parseInt(btn.dataset.day);
             const ex = parseInt(btn.dataset.ex);
@@ -829,7 +819,6 @@
         }));
     }
     
-    // Modal de URL com propagação
     let pendingGifData = null;
     function showUrlModalWithPropagation(day, ex, exName) {
         pendingGifData = { day, ex, exName };
@@ -850,7 +839,6 @@
     };
     window.onclick = (e) => { if(e.target === document.getElementById('urlModal')) document.getElementById('urlModal').style.display = 'none'; };
     
-    // Histórico de cargas para progressão
     function salvarHistoricoCargas() {
         const dataSegunda = formatYMD(currentMonday);
         const historico = {};

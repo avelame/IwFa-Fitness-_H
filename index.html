@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>IWFA Fitness | PPL Otimizado 42 anos</title>
+    <title>IWFA Fitness | </title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -173,7 +173,6 @@
             padding: 10px 12px;
             border-bottom: 1px solid #252e3a;
         }
-        /* Estrutura principal: GIF esquerda, nome centralizado, campos direita */
         .exercise-row {
             display: flex;
             align-items: center;
@@ -181,7 +180,6 @@
             gap: 10px;
             flex-wrap: nowrap;
         }
-        /* Coluna 1: GIF */
         .gif-left {
             flex-shrink: 0;
             background: #080c12;
@@ -231,7 +229,6 @@
             transition: 0.2s;
         }
         .gif-icon-btn:active { background: #FF8C00; color: black; }
-        /* Coluna 2: Nome do exercício centralizado */
         .exercise-name-center {
             flex: 1;
             text-align: center;
@@ -248,7 +245,6 @@
             color: #FF8C00;
             font-size: 0.8rem;
         }
-        /* Coluna 3: Campos reduzidos alinhados à direita */
         .fields-right {
             flex-shrink: 0;
             display: flex;
@@ -457,7 +453,6 @@
         [data-tooltip]:hover:before {
             display: block;
         }
-        /* Responsivo: se não couber, empilha */
         @media (max-width: 500px) {
             .top-actions { flex-direction: column; }
             .btn-treino { width: 100%; }
@@ -475,7 +470,7 @@
 <body>
 <div class="container">
     <div class="plan-header">
-        <h1><i class="fas fa-dumbbell"></i> Meu Plano PPL · 42 anos</h1>
+        <h1><i class="fas fa-dumbbell"></i> Meu Plano PPL · </h1>
     </div>
     <div class="days-tabs" id="daysTabs">
         <button class="tab-day" data-day="1">DIA 1 (A)</button>
@@ -503,7 +498,6 @@
     </div>
 </div>
 
-<!-- Modal URL GIF -->
 <div id="urlModal" class="modal">
     <div class="modal-content">
         <h3><i class="fas fa-link"></i> URL do GIF</h3>
@@ -515,13 +509,12 @@
     </div>
 </div>
 
-<!-- Modal Relatório -->
 <div id="reportModal" class="modal-report">
     <div class="report-content" id="reportContent"></div>
 </div>
 
 <script>
-    // ==================== BASE DE TREINOS (MESMA ESTRUTURA) ====================
+    // ==================== BASE DE TREINOS ====================
     const workoutsByDay = {
         1: { name: "PUSH · Peito / Ombro / Tríceps", muscles: ["Peito","Ombros","Tríceps"], timeMin: 70,
             exercises: [
@@ -594,27 +587,46 @@
     function getGif(day, idx) { return localStorage.getItem(`gif_${day}_${idx}`); }
     function setGif(day, idx, url) { if(url) localStorage.setItem(`gif_${day}_${idx}`, url); else localStorage.removeItem(`gif_${day}_${idx}`); renderCurrentDay(); }
 
-    // Histórico de cargas para progressão
-    function salvarHistoricoCargas() {
-        const dataSegunda = formatYMD(currentMonday);
-        const historico = {};
+    // ==================== FUNÇÃO PARA PROPAGAR GIF PARA MESMOS EXERCÍCIOS ====================
+    // Retorna uma lista de objetos { day, idx } onde o exercício tem o mesmo nome
+    function findSameExercises(exerciseName, currentDay, currentIdx) {
+        const matches = [];
         for (let day = 1; day <= 6; day++) {
             const workout = workoutsByDay[day];
             if (!workout) continue;
-            historico[day] = {};
-            workout.exercises.forEach((_, idx) => { historico[day][idx] = getLoad(day, idx); });
+            workout.exercises.forEach((ex, idx) => {
+                // Comparação exata do nome (case-sensitive, mas como está igual em todos os dias)
+                if (ex.name === exerciseName && !(day === currentDay && idx === currentIdx)) {
+                    matches.push({ day, idx });
+                }
+            });
         }
-        localStorage.setItem(`historico_semana_${dataSegunda}`, JSON.stringify(historico));
-    }
-    function carregarHistoricoSemanaAnterior() {
-        const semanaPassada = new Date(currentMonday);
-        semanaPassada.setDate(currentMonday.getDate() - 7);
-        const dataAnterior = formatYMD(semanaPassada);
-        const stored = localStorage.getItem(`historico_semana_${dataAnterior}`);
-        return stored ? JSON.parse(stored) : null;
+        return matches;
     }
 
-    // Datas e timer
+    // Propagação: salva o GIF em todos os exercícios com o mesmo nome (inclusive o atual)
+    // Usar uma flag para evitar loops, mas como não chamamos recursivamente dentro da propagação, é seguro.
+    function setGifForAllMatches(exerciseName, currentDay, currentIdx, gifUrl) {
+        const matches = findSameExercises(exerciseName, currentDay, currentIdx);
+        // Salva no atual primeiro
+        if (gifUrl) {
+            localStorage.setItem(`gif_${currentDay}_${currentIdx}`, gifUrl);
+        } else {
+            localStorage.removeItem(`gif_${currentDay}_${currentIdx}`);
+        }
+        // Salva em todos os outros
+        matches.forEach(({ day, idx }) => {
+            if (gifUrl) {
+                localStorage.setItem(`gif_${day}_${idx}`, gifUrl);
+            } else {
+                localStorage.removeItem(`gif_${day}_${idx}`);
+            }
+        });
+        // Re-renderiza o dia atual (já que as mudanças podem afetar outros dias, mas só precisamos atualizar o atual)
+        renderCurrentDay();
+    }
+
+    // ==================== FUNÇÕES AUXILIARES DE DATA E TIMER ====================
     let currentMonday = getMondayOfCurrentWeek();
     let activeDay = 1;
     let timerInterval = null;
@@ -660,6 +672,7 @@
         }
     }
 
+    // ==================== RENDER PRINCIPAL ====================
     function renderCurrentDay() {
         const dateObj = getDateOfWeekday(currentMonday, activeDay);
         const workout = workoutsByDay[activeDay];
@@ -703,9 +716,9 @@
                     <div class="gif-left">
                         <img src="${gifUrl}" alt="GIF" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'gif-left-placeholder\'><i class=\'fas fa-file-image\'></i><span>Erro</span></div>'">
                         <div class="gif-icon-buttons">
-                            <button class="gif-icon-btn upload-gif" data-day="${activeDay}" data-ex="${idx}" data-tooltip="Enviar GIF"><i class="fas fa-upload"></i></button>
-                            <button class="gif-icon-btn url-gif" data-day="${activeDay}" data-ex="${idx}" data-tooltip="URL GIF"><i class="fas fa-link"></i></button>
-                            <button class="gif-icon-btn remove-gif" data-day="${activeDay}" data-ex="${idx}" data-tooltip="Remover"><i class="fas fa-trash-alt"></i></button>
+                            <button class="gif-icon-btn upload-gif" data-day="${activeDay}" data-ex="${idx}" data-exname="${ex.name}" data-tooltip="Enviar GIF"><i class="fas fa-upload"></i></button>
+                            <button class="gif-icon-btn url-gif" data-day="${activeDay}" data-ex="${idx}" data-exname="${ex.name}" data-tooltip="URL GIF"><i class="fas fa-link"></i></button>
+                            <button class="gif-icon-btn remove-gif" data-day="${activeDay}" data-ex="${idx}" data-exname="${ex.name}" data-tooltip="Remover"><i class="fas fa-trash-alt"></i></button>
                         </div>
                     </div>
                 `;
@@ -714,8 +727,8 @@
                     <div class="gif-left">
                         <div class="gif-left-placeholder"><i class="fas fa-play-circle fa-2x"></i><span>GIF</span></div>
                         <div class="gif-icon-buttons">
-                            <button class="gif-icon-btn upload-gif" data-day="${activeDay}" data-ex="${idx}" data-tooltip="Enviar GIF"><i class="fas fa-upload"></i></button>
-                            <button class="gif-icon-btn url-gif" data-day="${activeDay}" data-ex="${idx}" data-tooltip="URL GIF"><i class="fas fa-link"></i></button>
+                            <button class="gif-icon-btn upload-gif" data-day="${activeDay}" data-ex="${idx}" data-exname="${ex.name}" data-tooltip="Enviar GIF"><i class="fas fa-upload"></i></button>
+                            <button class="gif-icon-btn url-gif" data-day="${activeDay}" data-ex="${idx}" data-exname="${ex.name}" data-tooltip="URL GIF"><i class="fas fa-link"></i></button>
                         </div>
                     </div>
                 `;
@@ -777,8 +790,11 @@
         document.querySelectorAll('.series-input').forEach(inp => inp.addEventListener('change', (e) => { setSeries(parseInt(inp.dataset.day), parseInt(inp.dataset.ex), inp.value); }));
         document.querySelectorAll('.reps-input').forEach(inp => inp.addEventListener('change', (e) => { setReps(parseInt(inp.dataset.day), parseInt(inp.dataset.ex), inp.value); }));
         
+        // Upload de GIF com propagação
         document.querySelectorAll('.upload-gif').forEach(btn => btn.addEventListener('click', (e) => {
-            const day = parseInt(btn.dataset.day), ex = parseInt(btn.dataset.ex);
+            const day = parseInt(btn.dataset.day);
+            const ex = parseInt(btn.dataset.ex);
+            const exName = btn.dataset.exname;
             const input = document.createElement('input');
             input.type = 'file';
             input.accept = 'image/gif';
@@ -786,27 +802,73 @@
                 const file = ev.target.files[0];
                 if(file && file.type === 'image/gif') {
                     const reader = new FileReader();
-                    reader.onload = (er) => setGif(day, ex, er.target.result);
+                    reader.onload = (er) => {
+                        const gifDataUrl = er.target.result;
+                        setGifForAllMatches(exName, day, ex, gifDataUrl);
+                    };
                     reader.readAsDataURL(file);
                 } else alert('Selecione um arquivo .gif válido');
             };
             input.click();
         }));
-        document.querySelectorAll('.url-gif').forEach(btn => btn.addEventListener('click', (e) => { showUrlModal(parseInt(btn.dataset.day), parseInt(btn.dataset.ex)); }));
-        document.querySelectorAll('.remove-gif').forEach(btn => btn.addEventListener('click', (e) => { setGif(parseInt(btn.dataset.day), parseInt(btn.dataset.ex), null); }));
+        
+        // URL GIF com propagação
+        document.querySelectorAll('.url-gif').forEach(btn => btn.addEventListener('click', (e) => {
+            const day = parseInt(btn.dataset.day);
+            const ex = parseInt(btn.dataset.ex);
+            const exName = btn.dataset.exname;
+            showUrlModalWithPropagation(day, ex, exName);
+        }));
+        
+        // Remover GIF com propagação
+        document.querySelectorAll('.remove-gif').forEach(btn => btn.addEventListener('click', (e) => {
+            const day = parseInt(btn.dataset.day);
+            const ex = parseInt(btn.dataset.ex);
+            const exName = btn.dataset.exname;
+            setGifForAllMatches(exName, day, ex, null);
+        }));
     }
     
-    let pendingGif = null;
-    function showUrlModal(day, ex) { pendingGif = {day, ex}; document.getElementById('urlModal').style.display = 'flex'; document.getElementById('modalUrlInput').value = ''; }
+    // Modal de URL com propagação
+    let pendingGifData = null;
+    function showUrlModalWithPropagation(day, ex, exName) {
+        pendingGifData = { day, ex, exName };
+        document.getElementById('urlModal').style.display = 'flex';
+        document.getElementById('modalUrlInput').value = '';
+    }
     document.getElementById('modalConfirmBtn').onclick = () => {
         const url = document.getElementById('modalUrlInput').value.trim();
-        if(pendingGif && url && (url.startsWith('http')||url.startsWith('//'))) setGif(pendingGif.day, pendingGif.ex, url);
-        else if(url) alert('URL inválida');
+        if(pendingGifData && url && (url.startsWith('http')||url.startsWith('//'))) {
+            setGifForAllMatches(pendingGifData.exName, pendingGifData.day, pendingGifData.ex, url);
+        } else if(url) alert('URL inválida');
         document.getElementById('urlModal').style.display = 'none';
-        pendingGif = null;
+        pendingGifData = null;
     };
-    document.getElementById('modalCancelBtn').onclick = () => { document.getElementById('urlModal').style.display = 'none'; pendingGif = null; };
+    document.getElementById('modalCancelBtn').onclick = () => {
+        document.getElementById('urlModal').style.display = 'none';
+        pendingGifData = null;
+    };
     window.onclick = (e) => { if(e.target === document.getElementById('urlModal')) document.getElementById('urlModal').style.display = 'none'; };
+    
+    // Histórico de cargas para progressão
+    function salvarHistoricoCargas() {
+        const dataSegunda = formatYMD(currentMonday);
+        const historico = {};
+        for (let day = 1; day <= 6; day++) {
+            const workout = workoutsByDay[day];
+            if (!workout) continue;
+            historico[day] = {};
+            workout.exercises.forEach((_, idx) => { historico[day][idx] = getLoad(day, idx); });
+        }
+        localStorage.setItem(`historico_semana_${dataSegunda}`, JSON.stringify(historico));
+    }
+    function carregarHistoricoSemanaAnterior() {
+        const semanaPassada = new Date(currentMonday);
+        semanaPassada.setDate(currentMonday.getDate() - 7);
+        const dataAnterior = formatYMD(semanaPassada);
+        const stored = localStorage.getItem(`historico_semana_${dataAnterior}`);
+        return stored ? JSON.parse(stored) : null;
+    }
     
     function updateProgress() {
         let completed = 0;

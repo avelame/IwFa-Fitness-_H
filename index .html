@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#12263a">
+<title>Plantões HUSE</title>
+<style>
+:root{--ink:#12263a;--pri:#1d6fa5;--d:#f5a524;--dbg:#fde9b8;--dtx:#7a4a00;--n:#3b4cca;--nbg:#d6dcff;--ntx:#1f2a7a;--red:#d1344a;--bg:#eceff3;--mu:#64748b;--ln:#dde3ea}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+.app{max-width:560px;margin:0 auto}
+header{background:var(--ink);color:#fff;padding:calc(14px + env(safe-area-inset-top)) 16px 52px;border-radius:0 0 28px 28px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.top b{font-size:.95rem;font-weight:700}.top small{display:block;font-size:.7rem;opacity:.65;font-weight:400}
+.pill{border:1px solid rgba(255,255,255,.35);background:none;color:#fff;border-radius:99px;padding:7px 14px;font-size:.78rem;font-weight:600}
+.nav{display:flex;align-items:center;gap:8px}
+.ib{width:46px;height:46px;border:0;border-radius:14px;background:rgba(255,255,255,.12);color:#fff;font-size:1.6rem;line-height:1}
+.ib:active{background:rgba(255,255,255,.28)}
+.ttl{position:relative;flex:1;text-align:center}
+.ttl h1{font-size:1.55rem;font-weight:800;letter-spacing:-.4px}
+.ttl input{position:absolute;inset:0;width:100%;height:100%;opacity:0}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:-34px 12px 10px;position:relative}
+.st{background:#fff;border-radius:16px;padding:10px 6px;text-align:center;box-shadow:0 2px 10px rgba(18,38,58,.08)}
+.st b{display:block;font-size:1.35rem;line-height:1.2}.st span{font-size:.68rem;color:var(--mu)}
+.st.d b{color:#c47f00}.st.n b{color:var(--n)}.st.f b{color:var(--red)}
+.card{background:#fff;border-radius:20px;margin:0 12px 12px;padding:10px;box-shadow:0 2px 10px rgba(18,38,58,.06)}
+.wd,.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.wd div{text-align:center;font-size:.68rem;font-weight:700;color:var(--mu);padding:4px 0}.wd div:first-child{color:var(--red)}
+.c{position:relative;min-height:64px;border:1.5px solid transparent;border-radius:11px;background:#f4f6f9;padding:4px 3px 3px;display:flex;flex-direction:column;justify-content:space-between;font:inherit;color:inherit;text-align:left;cursor:pointer}
+.c.e{background:none;cursor:default}.c:active:not(.e){transform:scale(.95)}
+.n{font-size:.8rem;font-weight:700;padding-left:2px}.s .n{color:var(--red)}
+.t .n{background:var(--ink);color:#fff;border-radius:99px;width:22px;height:22px;display:flex;align-items:center;justify-content:center;padding:0}
+.c.f{background:#fff4ec;border-color:#f4b98a}.c.w{border-color:var(--red)}
+.ic{position:absolute;top:3px;right:3px;font-size:.6rem;line-height:1.2;text-align:right}
+.ch{display:flex;flex-direction:column;gap:2px}
+.k{font-style:normal;font-size:.6rem;font-weight:700;text-align:center;border-radius:6px;padding:2px 0}
+.k.d{background:var(--dbg);color:var(--dtx)}.k.n{background:var(--nbg);color:var(--ntx)}
+.lg{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.72rem;color:var(--mu);margin-top:10px;padding:0 4px}
+.lg i{display:inline-block;width:12px;height:12px;border-radius:4px;vertical-align:-2px;margin-right:4px}
+.fl{font-size:.82rem;line-height:1.7}.fl b{color:var(--red);margin-right:6px}.card h3{font-size:.85rem;margin-bottom:6px}
+.bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:560px;display:flex;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--ln);z-index:20}
+.act{flex:1;height:52px;border:1px solid var(--ln);border-radius:14px;background:#fff;color:var(--ink);font-size:.74rem;font-weight:700;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px}
+.act span{font-size:1.15rem;line-height:1}.act.r{color:var(--red)}.act.p{background:var(--pri);border-color:var(--pri);color:#fff}.act:active{opacity:.75}
+.ov{position:fixed;inset:0;background:rgba(18,38,58,.55);display:none;align-items:flex-end;justify-content:center;z-index:50}
+.ov.on{display:flex}
+.sh{background:#fff;width:100%;max-width:560px;border-radius:24px 24px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom));max-height:92vh;overflow:auto;animation:up .2s ease}
+@keyframes up{from{transform:translateY(36px);opacity:0}}
+.sh h2{font-size:1.1rem;margin-bottom:4px}.hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.x{border:0;background:var(--bg);width:36px;height:36px;border-radius:50%;font-size:1.2rem;color:var(--mu)}
+.fe{color:#b4531a;font-size:.85rem;font-weight:600;margin-bottom:8px}
+.tg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.tg button{height:76px;border:2px solid var(--ln);border-radius:16px;background:#fff;font:inherit;font-weight:700;font-size:1rem;color:var(--mu)}
+.tg small{display:block;font-weight:500;font-size:.75rem;margin-top:2px}
+.tg .on.d{background:var(--dbg);border-color:var(--d);color:var(--dtx)}.tg .on.n{background:var(--nbg);border-color:var(--n);color:var(--ntx)}
+.al{background:#fdecef;color:#9b1c31;border-radius:10px;padding:9px 11px;font-size:.82rem;margin-top:6px}
+label{display:block;font-size:.8rem;font-weight:600;margin:10px 0 4px;color:#334155}
+select,input[type=text],input[type=date]{width:100%;height:48px;border:1.5px solid var(--ln);border-radius:12px;padding:0 12px;font:inherit;font-size:16px;background:#fff;color:var(--ink)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ok{width:100%;height:50px;margin-top:16px;border:0;border-radius:14px;background:var(--pri);color:#fff;font-size:1rem;font-weight:700}
+.tr{border:1px solid var(--ln);border-radius:14px;padding:11px;margin-bottom:10px;font-size:.85rem;line-height:1.5}
+.tr .l2{color:var(--mu);font-size:.78rem}.bt{display:flex;gap:6px;margin-top:8px}
+.bt button{flex:1;height:38px;border:1px solid var(--ln);background:#fff;border-radius:10px;font-size:.75rem;font-weight:600}.bt .del{color:var(--red)}
+.em{text-align:center;color:var(--mu);padding:20px}
+.toast{position:fixed;top:calc(14px + env(safe-area-inset-top));left:50%;transform:translate(-50%,-140%);background:var(--ink);color:#fff;padding:12px 18px;border-radius:12px;font-size:.88rem;z-index:99;max-width:90%;text-align:center;transition:transform .3s}
+.toast.on{transform:translate(-50%,0)}.toast.err{background:var(--red)}
+#ld{color:#fff;font-weight:600;flex-direction:column;align-items:center;justify-content:center;z-index:99}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div class="top"><div><b>Plantões HUSE</b><small>Mª de Fatima Velame · Escala 12x36</small></div><button class="pill" onclick="hoje()">Hoje</button></div>
+  <div class="nav">
+    <button class="ib" onclick="mov(-1)" aria-label="Mês anterior">‹</button>
+    <div class="ttl"><h1 id="ttl"></h1><input type="month" id="mi" aria-label="Escolher mês"></div>
+    <button class="ib" onclick="mov(1)" aria-label="Próximo mês">›</button>
+  </div>
+</header>
+<div class="stats">
+  <div class="st d"><b id="sd">0</b><span>Diurnos</span></div>
+  <div class="st n"><b id="sn">0</b><span>Noturnos</span></div>
+  <div class="st f"><b id="sf">0</b><span>Feriados</span></div>
+</div>
+<div class="card" id="card">
+  <div class="wd"><div>D</div><div>S</div><div>T</div><div>Q</div><div>Q</div><div>S</div><div>S</div></div>
+  <div class="grid" id="grid"></div>
+  <div class="lg"><span><i style="background:var(--dbg)"></i>Diurno</span><span><i style="background:var(--nbg)"></i>Noturno</span><span><i style="background:#fff4ec;border:1px solid #f4b98a"></i>★ Feriado</span><span><i style="border:1.5px solid var(--red)"></i>⚠ Dobra</span><span>🚗 Deslocamento</span></div>
+</div>
+<div class="card"><h3>Feriados do mês</h3><div class="fl" id="fl"></div></div>
+</div>
+
+<div class="bar">
+  <button class="act" onclick="salvarTudo()"><span>✔</span>Salvar</button>
+  <button class="act r" onclick="limpar()"><span>✕</span>Limpar</button>
+  <button class="act" onclick="abrirTroca()"><span>⇄</span>Trocar</button>
+  <button class="act" onclick="verTrocas()"><span>☰</span>Trocas</button>
+  <button class="act p" onclick="pdf()"><span>⤓</span>PDF</button>
+</div>
+
+<div class="ov" id="sd_"><div class="sh"><div class="hd"><span></span><button class="x" onclick="fecha('sd_')">×</button></div><div id="dbody"></div></div></div>
+
+<div class="ov" id="st"><div class="sh">
+  <div class="hd"><h2 id="tt">Nova troca</h2><button class="x" onclick="fecha('st')">×</button></div>
+  <div class="row"><div><label for="oh">Plantão origem</label><select id="oh"><option value="">Selecione</option><option>HUSE Diurno</option><option>HUSE Noturno</option></select></div><div><label for="od">Data origem</label><input type="date" id="od"></div></div>
+  <div class="row"><div><label for="dh">Plantão destino</label><select id="dh"><option value="">Selecione</option><option>HUSE Diurno</option><option>HUSE Noturno</option></select></div><div><label for="dd">Data destino</label><input type="date" id="dd"></div></div>
+  <label for="nm">Nome</label><input type="text" id="nm" placeholder="Com quem trocou">
+  <label for="ob">Observação (opcional)</label><input type="text" id="ob" placeholder="Motivo">
+  <button class="ok" onclick="salvarTroca()">Salvar troca</button>
+</div></div>
+
+<div class="ov" id="sl"><div class="sh">
+  <div class="hd"><h2>Trocas</h2><button class="pill" style="color:var(--pri);border-color:var(--ln)" id="ft" onclick="filtroTodas=!filtroTodas;drawTrocas()"></button><button class="x" onclick="fecha('sl')">×</button></div>
+  <div id="lb"></div>
+</div></div>
+
+<div class="ov" id="ld"><div>Gerando PDF…</div></div>
+<div class="toast" id="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+const $=i=>document.getElementById(i),KEY='escala_huse_data',DI='HUSE Diurno',NO='HUSE Noturno',now=new Date();
+const MES=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+const DS=['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'];
+let S={allEscalas:{},observacoes:[]},M=now.getMonth(),Y=now.getFullYear(),selDay=null,editIdx=null,filtroTodas=false,tm;
+try{const r=JSON.parse(localStorage.getItem(KEY));if(r){S.allEscalas=r.allEscalas||{};S.observacoes=r.observacoes||[]}}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify({...S,dataSalvamento:new Date().toISOString()}))}catch(e){toast('Não foi possível salvar','err')}};
+const dim=(m,y)=>new Date(y,m+1,0).getDate(),pad=n=>String(n).padStart(2,'0');
+const parse=s=>{if(!s)return null;const p=s.split('-');return p.length==3?new Date(+p[0],+p[1]-1,+p[2]):null};
+const br=d=>d?pad(d.getDate())+'/'+pad(d.getMonth()+1)+'/'+d.getFullYear():'--';
+const iso=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+const H=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const abre=i=>$(i).classList.add('on'),fecha=i=>$(i).classList.remove('on');
+function toast(m,t){const e=$('toast');e.textContent=m;e.className='toast on '+(t||'');clearTimeout(tm);tm=setTimeout(()=>e.className='toast',2800)}
+
+/* Feriados */
+const _fc={};
+function feriados(y){
+  if(_fc[y])return _fc[y];
+  const a=y%19,b=Math.floor(y/100),c=y%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,m=Math.floor((a+11*h+22*l)/451),mo=Math.floor((h+l-7*m+114)/31),da=((h+l-7*m+114)%31)+1;
+  const p=new Date(y,mo-1,da),mv=(n,nome)=>{const t=new Date(p);t.setDate(p.getDate()+n);return[t.getMonth(),t.getDate(),nome]};
+  const L=[[0,1,'Confraternização Universal'],[2,17,'Aniversário de Aracaju'],[3,21,'Tiradentes'],[4,1,'Dia do Trabalho'],[6,8,'Independência de Sergipe'],[8,7,'Independência do Brasil'],[9,12,'N. Sra. Aparecida'],[10,2,'Finados'],[10,15,'Proclamação da República'],[11,25,'Natal'],mv(-47,'Carnaval'),mv(-2,'Sexta-Feira Santa'),mv(60,'Corpus Christi')];
+  if(y>=2024)L.push([10,20,'Consciência Negra']);
+  const o={};L.forEach(x=>o[x[0]+'-'+x[1]]=x[2]);return _fc[y]=o;
+}
+
+/* Escala */
+function gerar(m,y){
+  const n=dim(m,y),r={[DI]:[],[NO]:[]};let sem=[];
+  for(let d=1;d<=n;d++){
+    sem.push(d);
+    if(new Date(y,m,d).getDay()==6||d==n){
+      const u=sem.filter(x=>{const w=new Date(y,m,x).getDay();return w>0&&w<6}).slice(0,3);
+      sem.forEach(x=>r[u.includes(x)?NO:DI].push(x));sem=[];
+    }
+  }
+  return r;
+}
+function esc(m,y){
+  const k=y+'_'+m;let e=S.allEscalas[k];
+  if(!e||(!e.limpo&&!(e[DI]||[]).length&&!(e[NO]||[]).length)){e=S.allEscalas[k]=gerar(m,y);save()}
+  e[DI]=e[DI]||[];e[NO]=e[NO]||[];return e;
+}
+function aplicar(t){
+  const o=parse(t.data),d=parse(t.dataTroca);
+  if(!o||!d)return 'Datas inválidas';
+  const eo=esc(o.getMonth(),o.getFullYear()),ed=esc(d.getMonth(),d.getFullYear());
+  if(!eo[t.hospital].includes(o.getDate()))return `Não existe ${t.hospital} em ${br(o)}`;
+  if(ed[t.hospitalTroca].includes(d.getDate()))return `Já existe ${t.hospitalTroca} em ${br(d)}`;
+  eo[t.hospital].splice(eo[t.hospital].indexOf(o.getDate()),1);
+  ed[t.hospitalTroca].push(d.getDate());ed[t.hospitalTroca].sort((a,b)=>a-b);
+  return null;
+}
+function reverter(t){
+  const o=parse(t.data),d=parse(t.dataTroca);if(!o||!d)return;
+  const eo=esc(o.getMonth(),o.getFullYear()),ed=esc(d.getMonth(),d.getFullYear());
+  const i=ed[t.hospitalTroca].indexOf(d.getDate());if(i>-1)ed[t.hospitalTroca].splice(i,1);
+  if(!eo[t.hospital].includes(o.getDate())){eo[t.hospital].push(o.getDate());eo[t.hospital].sort((a,b)=>a-b)}
+}
+
+/* Calendário */
+function render(){
+  const e=esc(M,Y),n=dim(M,Y),f=feriados(Y),first=new Date(Y,M,1).getDay();
+  $('ttl').textContent=MES[M]+' '+Y;$('mi').value=Y+'-'+pad(M+1);
+  let h='',nf=[];
+  for(let i=0;i<first;i++)h+='<div class="c e"></div>';
+  for(let d=1;d<=n;d++){
+    const D=e[DI].includes(d),N=e[NO].includes(d),fe=f[M+'-'+d],dob=D&&N,des=D&&e[NO].includes(d-1);
+    if(fe)nf.push(d);
+    const isT=d==now.getDate()&&M==now.getMonth()&&Y==now.getFullYear();
+    h+=`<button class="c${fe?' f':''}${dob?' w':''}${isT?' t':''}${(first+d-1)%7==0?' s':''}" onclick="openDia(${d})"><span class="n">${d}</span><span class="ic">${fe?'★':''}${dob?'⚠':''}${des?'🚗':''}</span><span class="ch">${D?'<i class="k d">Dia</i>':''}${N?'<i class="k n">Noite</i>':''}</span></button>`;
+  }
+  $('grid').innerHTML=h;
+  $('sd').textContent=e[DI].length;$('sn').textContent=e[NO].length;$('sf').textContent=nf.length;
+  $('fl').innerHTML=nf.length?nf.map(d=>`<div><b>${pad(d)}/${pad(M+1)}</b>${f[M+'-'+d]}</div>`).join(''):'Sem feriados neste mês';
+}
+function mov(x){M+=x;if(M<0){M=11;Y--}if(M>11){M=0;Y++}render()}
+function hoje(){M=now.getMonth();Y=now.getFullYear();render()}
+$('mi').addEventListener('change',function(){const v=this.value.split('-');if(v.length==2){Y=+v[0];M=+v[1]-1;render()}});
+$('mi').addEventListener('click',function(){try{this.showPicker()}catch(e){}});
+let tx=null;const cd=$('card');
+cd.addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
+cd.addEventListener('touchend',e=>{if(tx==null)return;const dx=e.changedTouches[0].clientX-tx;tx=null;if(Math.abs(dx)>70)mov(dx<0?1:-1)},{passive:true});
+
+/* Dia */
+function openDia(d){selDay=d;drawDia();abre('sd_')}
+function drawDia(){
+  const d=selDay,e=esc(M,Y),dt=new Date(Y,M,d),fe=feriados(Y)[M+'-'+d],D=e[DI].includes(d),N=e[NO].includes(d);
+  let al='';
+  if(D&&N)al+='<p class="al">⚠ Dobra: Diurno e Noturno no mesmo dia.</p>';
+  if(D&&e[NO].includes(d-1))al+='<p class="al">🚗 Noturno ontem e Diurno hoje: atenção ao deslocamento.</p>';
+  $('dbody').innerHTML=`<h2>${DS[dt.getDay()]}, ${d} de ${MES[M]}</h2>${fe?`<p class="fe">★ ${fe}</p>`:''}<div class="tg"><button class="${D?'on d':''}" onclick="tg('${DI}')">☀ Diurno<small>${D?'Plantão':'Folga'}</small></button><button class="${N?'on n':''}" onclick="tg('${NO}')">☾ Noturno<small>${N?'Plantão':'Folga'}</small></button></div>${al}`;
+}
+function tg(h){const e=esc(M,Y),i=e[h].indexOf(selDay);if(i<0){e[h].push(selDay);e[h].sort((a,b)=>a-b)}else e[h].splice(i,1);e.limpo=true;save();render();drawDia()}
+function salvarTudo(){save();toast('Dados salvos')}
+function limpar(){
+  if(!confirm(`Limpar todos os plantões de ${MES[M]} ${Y}?\nOs registros de trocas não são apagados.`))return;
+  S.allEscalas[Y+'_'+M]={[DI]:[],[NO]:[],limpo:true};save();render();toast(MES[M]+' limpo')
+}
+
+/* Trocas */
+function abrirTroca(i){
+  editIdx=i==null?null:i;const t=editIdx!=null?S.observacoes[editIdx]:null;
+  $('tt').textContent=t?'Editar troca':'Nova troca';
+  $('oh').value=t?t.hospital:'';$('od').value=t?t.data:iso(now);
+  $('dh').value=t?t.hospitalTroca:'';$('dd').value=t?t.dataTroca:iso(now);
+  $('nm').value=t?t.nome:'';$('ob').value=t?(t.observacao||''):'';
+  abre('st');
+}
+function salvarTroca(){
+  const t={hospital:$('oh').value,hospitalTroca:$('dh').value,data:$('od').value,dataTroca:$('dd').value,nome:$('nm').value.trim(),observacao:$('ob').value.trim()};
+  if(!t.hospital||!t.hospitalTroca||!t.data||!t.dataTroca||!t.nome)return toast('Preencha todos os campos','err');
+  const old=editIdx!=null?S.observacoes[editIdx]:null;
+  if(old)reverter(old);
+  const er=aplicar(t);
+  if(er){if(old)aplicar(old);return toast(er,'err')}
+  if(old)S.observacoes[editIdx]=t;else S.observacoes.push(t);
+  save();fecha('st');render();if($('sl').classList.contains('on'))drawTrocas();toast('Troca salva');
+}
+const trocasDoMes=()=>S.observacoes.map((t,i)=>({t,i})).filter(({t})=>[t.data,t.dataTroca].some(s=>{const d=parse(s);return d&&d.getMonth()==M&&d.getFullYear()==Y}));
+function verTrocas(){drawTrocas();abre('sl')}
+function drawTrocas(){
+  const L=filtroTodas?S.observacoes.map((t,i)=>({t,i})):trocasDoMes();
+  $('ft').textContent=filtroTodas?'Ver só este mês':'Ver todas';
+  $('lb').innerHTML=L.length?L.map(({t,i})=>`<div class="tr"><div><b>${H(t.hospital)}</b> ${br(parse(t.data))} → <b>${H(t.hospitalTroca)}</b> ${br(parse(t.dataTroca))}</div><div class="l2">${H(t.nome)}${t.observacao?' · '+H(t.observacao):''}</div><div class="bt"><button onclick="abrirTroca(${i})">Editar</button><button onclick="revTroca(${i})">Reverter</button><button class="del" onclick="delTroca(${i})">Excluir</button></div></div>`).join(''):'<p class="em">Nenhuma troca '+(filtroTodas?'registrada':'em '+MES[M])+'</p>';
+}
+function revTroca(i){if(!confirm('Reverter esta troca e restaurar os plantões originais?'))return;reverter(S.observacoes[i]);S.observacoes.splice(i,1);save();render();drawTrocas();toast('Troca revertida')}
+function delTroca(i){if(!confirm('Excluir só o registro? Os plantões continuam como estão.'))return;S.observacoes.splice(i,1);save();drawTrocas();toast('Registro excluído')}
+document.querySelectorAll('.ov').forEach(o=>o.addEventListener('click',ev=>{if(ev.target==o&&o.id!='ld')o.classList.remove('on')}));
+
+/* PDF: página única A4 retrato com o mês inteiro */
+function pdf(){
+  if(typeof html2pdf==='undefined')return toast('PDF precisa de internet para carregar a biblioteca','err');
+  const e=esc(M,Y),n=dim(M,Y),f=feriados(Y),first=new Date(Y,M,1).getDay(),rows=Math.ceil((first+n)/7);
+  let tb='',nf=0;
+  for(let r=0;r<rows;r++){tb+='<tr>';for(let c=0;c<7;c++){
+    const d=r*7+c-first+1;
+    if(d<1||d>n){tb+='<td class="z"></td>';continue}
+    const D=e[DI].includes(d),N=e[NO].includes(d),fe=f[M+'-'+d];if(fe)nf++;
+    tb+=`<td class="${fe?'f':''}${D&&N?' w':''}"><div class="dn${c==0?' s':''}">${d}${fe?' ★':''}</div>${fe?`<div class="fn">${fe}</div>`:''}${D?'<div class="p d">Diurno</div>':''}${N?'<div class="p n">Noturno</div>':''}</td>`;
+  }tb+='</tr>'}
+  const T=trocasDoMes().map(({t})=>`<tr><td>${H(t.hospital)}</td><td>${br(parse(t.data))}</td><td>${H(t.hospitalTroca)}</td><td>${br(parse(t.dataTroca))}</td><td>${H(t.nome)}</td><td>${H(t.observacao)}</td></tr>`).join('');
+  const el=document.createElement('div');
+  el.style.cssText='width:720px;background:#fff;font-family:Arial,Helvetica,sans-serif;color:#12263a;padding:4px';
+  el.innerHTML=`<style>
+    h1{font-size:22px;text-align:center;color:#12263a;margin:0 0 4px}.sb{text-align:center;font-size:12px;color:#64748b;margin-bottom:12px}
+    .sm{display:flex;gap:8px;margin-bottom:12px}.sm div{flex:1;border:1px solid #cbd5e1;border-radius:6px;padding:6px;text-align:center;font-size:11px;color:#64748b}.sm b{display:block;font-size:17px;color:#12263a}
+    table{width:100%;border-collapse:collapse;table-layout:fixed}
+    th{background:#12263a;color:#fff;font-size:11px;padding:6px 0;border:1px solid #12263a}
+    .cal td{border:1px solid #cbd5e1;height:92px;vertical-align:top;padding:4px}
+    .z{background:#f1f5f9}.f{background:#fff4ec}.w{outline:2px solid #d1344a;outline-offset:-2px}
+    .dn{font-size:13px;font-weight:700}.s{color:#d1344a}.fn{font-size:8px;color:#b4531a;line-height:1.2;margin:1px 0 3px}
+    .p{font-size:10px;font-weight:700;text-align:center;border-radius:4px;padding:3px 0;margin-top:3px}.p.d{background:#fde9b8;color:#7a4a00}.p.n{background:#d6dcff;color:#1f2a7a}
+    .lg{font-size:10px;color:#64748b;margin:8px 0 14px}
+    h2{font-size:13px;margin:0 0 6px;color:#12263a}.tt td,.tt th{border:1px solid #cbd5e1;font-size:10px;padding:5px;text-align:left}.tt th{background:#12263a;color:#fff}
+    tr{page-break-inside:avoid}
+  </style>
+  <h1>ESCALA HUSE — ${MES[M].toUpperCase()}/${Y}</h1>
+  <div class="sb">Plantões de Mª de Fatima Velame · Escala 12x36 · Gerado em ${new Date().toLocaleDateString('pt-BR')}</div>
+  <div class="sm"><div><b>${e[DI].length}</b>Diurnos</div><div><b>${e[NO].length}</b>Noturnos</div><div><b>${e[DI].length+e[NO].length}</b>Total</div><div><b>${nf}</b>Feriados</div></div>
+  <table class="cal"><thead><tr>${['DOM','SEG','TER','QUA','QUI','SEX','SÁB'].map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>${tb}</tbody></table>
+  <div class="lg">★ Feriado · Contorno vermelho: dobra (Diurno e Noturno no mesmo dia)</div>
+  ${T?`<h2>Trocas registradas</h2><table class="tt"><thead><tr><th>Origem</th><th>Data</th><th>Destino</th><th>Data</th><th>Nome</th><th>Obs</th></tr></thead><tbody>${T}</tbody></table>`:''}`;
+  abre('ld');
+  setTimeout(()=>{
+    html2pdf().set({margin:8,filename:`escala_huse_${MES[M].toLowerCase()}_${Y}.pdf`,image:{type:'jpeg',quality:.96},html2canvas:{scale:2,useCORS:true,windowWidth:730,backgroundColor:'#fff'},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},pagebreak:{mode:['css','legacy']}}).from(el).save()
+      .then(()=>{fecha('ld');toast('PDF gerado')}).catch(er=>{fecha('ld');toast('Erro ao gerar PDF','err');console.error(er)});
+  },300);
+}
+
+render();
+</script>
+</body>
+</html>
